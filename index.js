@@ -2909,11 +2909,6 @@
 	  return state.set("emailSignInSuccessModalVisible", true);
 	}), _defineProperty(_createReducer, emailSignInActions.EMAIL_SIGN_IN_ERROR, function (state) {
 	  return state.set("emailSignInErrorModalVisible", true);
-	}), _defineProperty(_createReducer, oAuthSignInActions.OAUTH_SIGN_IN_COMPLETE, function (state) {
-	  return state.merge({
-	    oAuthSignInSuccessModalVisible: true,
-	    oAuthSignInLoadingProvider: null
-	  });
 	}), _defineProperty(_createReducer, oAuthSignInActions.OAUTH_SIGN_IN_ERROR, function (state) {
 	  return state.merge({
 	    oAuthSignInErrorModalVisible: true,
