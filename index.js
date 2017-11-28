@@ -927,7 +927,8 @@
 	    "token-type": "Bearer",
 	    client: "{{ client }}",
 	    expiry: "{{ expiry }}",
-	    uid: "{{ uid }}"
+	    uid: "{{ uid }}",
+	    "resource-class": "{{ resource-class }}"
 	  },
 
 	  parseExpiry: function parseExpiry(headers) {
@@ -1003,7 +1004,7 @@
 	    });
 	  } else if (savedCreds) {
 	    // retrieve exisiting resource type from local storage
-	    var resourceClass = savedCreds["resource_class"];
+	    var resourceClass = savedCreds["resource-class"];
 
 	    // verify session credentials with API
 	    return (0, _fetch2.default)("" + (0, _sessionStorage.getApiUrl)(currentEndpointKey) + currentEndpoint[currentEndpointKey].tokenValidationPath + "?resource_class=" + resourceClass).then(function (response) {
@@ -2160,7 +2161,7 @@
 	      popup.close();
 	      (0, _sessionStorage.persistData)(C.SAVED_CREDS_KEY, (0, _parseUrl.normalizeTokenKeys)(creds));
 	      var currentCreds = (0, _sessionStorage.retrieveData)(C.SAVED_CREDS_KEY);
-	      var resourceClass = currentCreds["resource_class"];
+	      var resourceClass = currentCreds["resource-class"];
 
 	      (0, _fetch2.default)((0, _sessionStorage.getTokenValidationPath)(endpointKey) + "?resource_class=" + resourceClass).then(_handleFetchResponse.parseResponse).then(function (_ref) {
 	        var data = _ref.data;
