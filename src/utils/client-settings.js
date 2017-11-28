@@ -42,7 +42,8 @@ const defaultSettings = {
     "token-type":   "Bearer",
     client:         "{{ client }}",
     expiry:         "{{ expiry }}",
-    uid:            "{{ uid }}"
+    uid:            "{{ uid }}",
+    "resource-class": "{{ resource-class }}"
   },
 
   parseExpiry: function(headers){
@@ -106,7 +107,7 @@ export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}
     });
   } else if (savedCreds) {
     // retrieve exisiting resource type from local storage
-    let resourceClass = savedCreds["resource_class"];
+    let resourceClass = savedCreds["resource-class"];
 
     // verify session credentials with API
     return fetch(`${getApiUrl(currentEndpointKey)}${currentEndpoint[currentEndpointKey].tokenValidationPath}?resource_class=${resourceClass}`)
