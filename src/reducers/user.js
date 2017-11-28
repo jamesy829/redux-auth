@@ -53,22 +53,11 @@ export default createReducer(initialState, {
           });
   },
 
-  [OAUTH_SIGN_IN_COMPLETE]: (state, { endpoint, user }) => {
-    if (state.get('isSignedIn') === true) {
-      const newState = state.setIn(['attributes', 'identities'], user);
-
-      return newState.merge({
-        isSignedIn: true,
-        endpointKey: endpoint
-      });
-    }
-
-    return state.merge({
-      attributes: user,
-      isSignedIn: true,
-      endpointKey: endpoint
-    });
-  },
+  [OAUTH_SIGN_IN_COMPLETE]: (state, { endpoint, user }) => state.merge({
+    attributes: user,
+    isSignedIn: true,
+    endpointKey: endpoint
+  }),
 
   [ssActions.SS_AUTH_TOKEN_UPDATE]: (state, {user, mustResetPassword, firstTimeLogin}) => {
     return state.merge({

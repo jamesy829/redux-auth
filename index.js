@@ -2783,16 +2783,6 @@
 	}), _defineProperty(_createReducer, _oauthSignIn.OAUTH_SIGN_IN_COMPLETE, function (state, _ref7) {
 	  var endpoint = _ref7.endpoint,
 	      user = _ref7.user;
-
-	  if (state.get('isSignedIn') === true) {
-	    var newState = state.setIn(['attributes', 'identities'], user);
-
-	    return newState.merge({
-	      isSignedIn: true,
-	      endpointKey: endpoint
-	    });
-	  }
-
 	  return state.merge({
 	    attributes: user,
 	    isSignedIn: true,
@@ -2913,6 +2903,11 @@
 	  return state.set("emailSignInSuccessModalVisible", true);
 	}), _defineProperty(_createReducer, emailSignInActions.EMAIL_SIGN_IN_ERROR, function (state) {
 	  return state.set("emailSignInErrorModalVisible", true);
+	}), _defineProperty(_createReducer, oAuthSignInActions.OAUTH_SIGN_IN_COMPLETE, function (state) {
+	  return state.merge({
+	    oAuthSignInSuccessModalVisible: true,
+	    oAuthSignInLoadingProvider: null
+	  });
 	}), _defineProperty(_createReducer, oAuthSignInActions.OAUTH_SIGN_IN_ERROR, function (state) {
 	  return state.merge({
 	    oAuthSignInErrorModalVisible: true,
