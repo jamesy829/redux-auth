@@ -1494,11 +1494,10 @@
 	  var json = response.json();
 	  if (response.status >= 200 && response.status < 300) {
 	    return json;
-	  } else {
-	    return json.then(function (err) {
-	      return Promise.reject(err);
-	    });
 	  }
+	  return json.then(function (err) {
+	    return Promise.reject(err);
+	  });
 	}
 
 /***/ },
