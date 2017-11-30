@@ -2932,8 +2932,6 @@
 	  return state.set("signOutSuccessModalVisible", false);
 	}), _defineProperty(_createReducer, uiActions.HIDE_SIGN_OUT_ERROR_MODAL, function (state) {
 	  return state.set("signOutErrorModalVisible", false);
-	}), _defineProperty(_createReducer, emailSignUpActions.EMAIL_SIGN_UP_ERROR, function (state) {
-	  return state.set("emailSignUpErrorModalVisible", true);
 	}), _defineProperty(_createReducer, uiActions.HIDE_EMAIL_SIGN_UP_SUCCESS_MODAL, function (state) {
 	  return state.merge({
 	    emailSignUpSuccessModalVisible: false,
