@@ -2369,10 +2369,15 @@
 	      return _react2.default.createElement(
 	        _semanticUiReact.Form.Field,
 	        null,
-	        _react2.default.createElement(_semanticUiReact.Form.Input, _extends({
-	          error: this.props.errors.size ? "error" : null,
+	        _react2.default.createElement(
+	          "label",
+	          null,
+	          this.props.label
+	        ),
+	        _react2.default.createElement("input", _extends({}, this.props, {
+	          style: this.props.errors.size ? "error" : null,
 	          onChange: this.handleInput.bind(this)
-	        }, this.props)),
+	        })),
 	        this.renderErrorList()
 	      );
 	    }
