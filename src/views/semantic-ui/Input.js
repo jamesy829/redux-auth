@@ -26,34 +26,37 @@ class AuthInput extends React.Component {
         <div className='auth-error-message has-error'>
           {this.props.errors.map((err, i) => {
             return (
-              <p className="control-label inline-error-item"
-                 style={{paddingLeft: "20px", position: "relative", marginBottom: "28px"}}
-                 key={i}>
-
-                <Icon name="attention"
-                           style={{
-                             position: "absolute",
-                             left: 0,
-                             top: 2
-                           }}
-                /> {this.props.label} {err}
-              </p>
+              <p
+                className="control-label inline-error-item"
+                style={{paddingLeft: "20px", position: "relative", marginBottom: "28px"}}
+                key={i}
+              >
+                <Icon
+                  name="attention"
+                  style={{
+                          position: "absolute",
+                          left: 0,
+                          top: 2
+                        }}
+                      />{this.props.label} {err}
+                    </p>
             );
           })}
         </div>
       );
-    } else {
-      return <span />;
     }
+
+    return <span />;
   }
 
   render () {
     return (
       <Form.Field>
-        <label>{this.props.label}</label>
-        <input {...this.props}
-               style={(this.props.errors.size) ? "error" : null}
-               onChange={this.handleInput.bind(this)} />
+        <Form.Input
+          error={(this.props.errors.size) ? "error" : null}
+          onChange={this.handleInput.bind(this)}
+          {...this.props}
+        />
         {this.renderErrorList()}
       </Form.Field>
     );

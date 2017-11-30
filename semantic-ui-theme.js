@@ -2340,26 +2340,28 @@
 	          this.props.errors.map(function (err, i) {
 	            return _react2.default.createElement(
 	              "p",
-	              { className: "control-label inline-error-item",
+	              {
+	                className: "control-label inline-error-item",
 	                style: { paddingLeft: "20px", position: "relative", marginBottom: "28px" },
-	                key: i },
-	              _react2.default.createElement(_semanticUiReact.Icon, { name: "attention",
+	                key: i
+	              },
+	              _react2.default.createElement(_semanticUiReact.Icon, {
+	                name: "attention",
 	                style: {
 	                  position: "absolute",
 	                  left: 0,
 	                  top: 2
 	                }
 	              }),
-	              " ",
 	              _this2.props.label,
 	              " ",
 	              err
 	            );
 	          })
 	        );
-	      } else {
-	        return _react2.default.createElement("span", null);
 	      }
+
+	      return _react2.default.createElement("span", null);
 	    }
 	  }, {
 	    key: "render",
@@ -2367,14 +2369,10 @@
 	      return _react2.default.createElement(
 	        _semanticUiReact.Form.Field,
 	        null,
-	        _react2.default.createElement(
-	          "label",
-	          null,
-	          this.props.label
-	        ),
-	        _react2.default.createElement("input", _extends({}, this.props, {
-	          style: this.props.errors.size ? "error" : null,
-	          onChange: this.handleInput.bind(this) })),
+	        _react2.default.createElement(_semanticUiReact.Form.Input, _extends({
+	          error: this.props.errors.size ? "error" : null,
+	          onChange: this.handleInput.bind(this)
+	        }, this.props)),
 	        this.renderErrorList()
 	      );
 	    }

@@ -87,9 +87,9 @@ export default createReducer(initialState, {
   //   emailSignUpAddress: user.email
   // }),
 
-  [emailSignUpActions.EMAIL_SIGN_UP_ERROR]: state => state.set(
-    "emailSignUpErrorModalVisible", true
-  ),
+  // [emailSignUpActions.EMAIL_SIGN_UP_ERROR]: state => state.set(
+  //   "emailSignUpErrorModalVisible", true
+  // ),
 
   [uiActions.HIDE_EMAIL_SIGN_UP_SUCCESS_MODAL]: state => state.merge({
     emailSignUpSuccessModalVisible: false,
