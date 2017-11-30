@@ -52,10 +52,11 @@ class AuthInput extends React.Component {
   render () {
     return (
       <Form.Field>
-        <Form.Input
-          error={(this.props.errors.size) ? "error" : null}
-          onChange={this.handleInput.bind(this)}
+        <label>{this.props.label}</label>
+        <input
           {...this.props}
+          style={(this.props.errors.size) ? "error" : null}
+          onChange={this.handleInput.bind(this)}
         />
         {this.renderErrorList()}
       </Form.Field>
