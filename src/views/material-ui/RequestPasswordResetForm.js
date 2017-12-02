@@ -65,18 +65,14 @@ class RequestPasswordResetForm extends React.Component {
           onChange={this.handleInput.bind(this, "email")}
           {...this.props.inputProps.email} />
 
-        <ButtonLoader
-          loading={loading}
+        <button
           type="submit"
-          primary={true}
-          icon={ContentSend}
-          style={{float: "right"}}
-          className="request-password-reset-submit"
+          className="request-password-reset-submit button-primary"
           disabled={inputDisabled || submitDisabled}
           onClick={this.handleSubmit.bind(this)}
-          {...this.props.inputProps.submit}>
+        >
           Request Password Reset
-        </ButtonLoader>
+        </button>
       </form>
     );
   }

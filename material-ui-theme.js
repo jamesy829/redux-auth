@@ -2173,22 +2173,24 @@
 	            actions: [_react2.default.createElement(
 	              _FlatButton2.default,
 	              _extends({
+	                key: "submit"
+	              }, this.props, {
+	                type: "submit",
+	                primary: true,
+	                className: "password-reset-success-modal-submit button-primary",
+	                onClick: this.handleSubmit.bind(this)
+	              }, this.props.inputProps.submit),
+	              "Submit"
+	            ), _react2.default.createElement("br", null), _react2.default.createElement("br", null), _react2.default.createElement(
+	              _FlatButton2.default,
+	              _extends({
 	                key: "cancel",
 	                className: "password-reset-success-modal-close",
 	                onClick: this.close.bind(this),
 	                secondary: true
 	              }, this.props.inputProps.cancel),
 	              "Cancel"
-	            ), _react2.default.createElement(_ButtonLoader2.default, _extends({
-	              key: "submit"
-	            }, this.props, {
-	              loading: loading,
-	              type: "submit",
-	              primary: true,
-	              className: "password-reset-success-modal-submit",
-	              icon: _lock2.default,
-	              onClick: this.handleSubmit.bind(this)
-	            }, this.props.inputProps.submit))],
+	            )],
 	            title: "Reset Your Password" },
 	          _react2.default.createElement(
 	            "form",
@@ -3081,17 +3083,13 @@
 	          onChange: this.handleInput.bind(this, "email")
 	        }, this.props.inputProps.email)),
 	        _react2.default.createElement(
-	          _ButtonLoader2.default,
-	          _extends({
-	            loading: loading,
+	          "button",
+	          {
 	            type: "submit",
-	            primary: true,
-	            icon: _send2.default,
-	            style: { float: "right" },
-	            className: "request-password-reset-submit",
+	            className: "request-password-reset-submit button-primary",
 	            disabled: inputDisabled || submitDisabled,
 	            onClick: this.handleSubmit.bind(this)
-	          }, this.props.inputProps.submit),
+	          },
 	          "Request Password Reset"
 	        )
 	      );
