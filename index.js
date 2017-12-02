@@ -990,7 +990,8 @@
 
 	  if ((0, _sessionStorage.getCurrentSettings)().initialCredentials) {
 	    // skip initial headers check (i.e. check was already done server-side)
-	    var headers = (0, _sessionStorage.getCurrentSettings)().initialCredentials;
+	    var headers = (0, _sessionStorage.getCurrentSettings)().initialCredentials.headers;
+
 	    (0, _sessionStorage.persistData)(C.SAVED_CREDS_KEY, headers);
 	    return (0, _fetch2.default)("" + (0, _sessionStorage.getApiUrl)(currentEndpointKey) + currentEndpoint[currentEndpointKey].tokenValidationPath).then(function (response) {
 	      return (0, _handleFetchResponse.parseResponse)(response, function () {

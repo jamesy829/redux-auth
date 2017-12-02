@@ -96,7 +96,7 @@ export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}
 
   if (getCurrentSettings().initialCredentials) {
     // skip initial headers check (i.e. check was already done server-side)
-    let headers = getCurrentSettings().initialCredentials;
+    let { headers } = getCurrentSettings().initialCredentials;
     persistData(C.SAVED_CREDS_KEY, headers);
     return fetch(`${getApiUrl(currentEndpointKey)}${currentEndpoint[currentEndpointKey].tokenValidationPath}`)
     .then(response => {
