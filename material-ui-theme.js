@@ -2306,6 +2306,11 @@
 	  }
 
 	  _createClass(ButtonLoader, [{
+	    key: "componentDidCatch",
+	    value: function componentDidCatch() {
+	      debugger;
+	    }
+	  }, {
 	    key: "handleClick",
 	    value: function handleClick(ev) {
 	      ev.preventDefault();
@@ -3081,17 +3086,13 @@
 	          onChange: this.handleInput.bind(this, "email")
 	        }, this.props.inputProps.email)),
 	        _react2.default.createElement(
-	          _ButtonLoader2.default,
-	          _extends({
-	            loading: loading,
+	          "button",
+	          {
 	            type: "submit",
-	            primary: true,
-	            icon: _send2.default,
-	            style: { float: "right" },
-	            className: "request-password-reset-submit",
+	            className: "request-password-reset-submit button-primary",
 	            disabled: inputDisabled || submitDisabled,
 	            onClick: this.handleSubmit.bind(this)
-	          }, this.props.inputProps.submit),
+	          },
 	          "Request Password Reset"
 	        )
 	      );
