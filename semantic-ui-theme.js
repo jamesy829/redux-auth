@@ -2342,13 +2342,13 @@
 	              "p",
 	              {
 	                className: "control-label inline-error-item",
-	                style: { paddingLeft: "20px", position: "relative", marginBottom: "28px" },
+	                style: { paddingLeft: '20px', position: 'relative', marginBottom: '5px' },
 	                key: i
 	              },
 	              _react2.default.createElement(_semanticUiReact.Icon, {
 	                name: "attention",
 	                style: {
-	                  position: "absolute",
+	                  position: 'absolute',
 	                  left: 0,
 	                  top: 2
 	                }
@@ -2393,7 +2393,7 @@
 	  errors: _propTypes2.default.object
 	};
 	AuthInput.defaultProps = {
-	  label: "",
+	  label: '',
 	  value: null,
 	  errors: _immutable2.default.fromJS([])
 	};
@@ -2541,6 +2541,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.PureComponent = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -2564,13 +2565,33 @@
 
 	var _reactRedux = __webpack_require__(9);
 
+	var _immutable = __webpack_require__(14);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var defaultInputProps = {
+	  email: {
+	    label: 'Email',
+	    type: 'email'
+	  },
+	  password: {
+	    label: 'Password',
+	    type: 'password'
+	  },
+	  passwordConfirmation: {
+	    label: 'Password Confirmation',
+	    type: 'password'
+	  },
+	  submit: {}
+	};
 
 	var EmailSignUpForm = function (_React$Component) {
 	  _inherits(EmailSignUpForm, _React$Component);
@@ -2584,7 +2605,7 @@
 	  _createClass(EmailSignUpForm, [{
 	    key: "getEndpoint",
 	    value: function getEndpoint() {
-	      return this.props.endpoint || this.props.auth.getIn(["configure", "currentEndpointKey"]) || this.props.auth.getIn(["configure", "defaultEndpointKey"]);
+	      return this.props.endpoint || this.props.auth.getIn(['configure', 'currentEndpointKey']) || this.props.auth.getIn(['configure', 'defaultEndpointKey']);
 	    }
 	  }, {
 	    key: "handleInput",
@@ -2595,76 +2616,123 @@
 	    key: "handleSubmit",
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	      var formData = this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form"]).toJS();
+	      var formData = this.props.auth.getIn(['emailSignUp', this.getEndpoint(), 'form']).toJS();
 	      this.props.dispatch((0, _emailSignUp.emailSignUp)(formData, this.getEndpoint())).then(this.props.next).catch(function () {});
 	    }
 	  }, {
-	    key: "additionalInputs",
-	    value: function additionalInputs(disabled) {
+	    key: "renderInputFields",
+	    value: function renderInputFields(inputFieldsMap, disabled) {
 	      var _this2 = this;
 
-	      return this.props.additionalInputs.reduce(function (memo, value, key) {
-	        memo.push(_react2.default.createElement(_Input2.default, { type: "text",
+	      return Object.keys(inputFieldsMap).map(function (inputKey) {
+	        var input = inputFieldsMap[inputKey];
+	        return _this2.renderInput(input, disabled);
+	      });
+	    }
+	  }, {
+	    key: "renderInput",
+	    value: function renderInput(inputDetails, disabled) {
+	      var defaultColumnWidth = 16;
+	      var key = inputDetails.key,
+	          propsKey = inputDetails.propsKey;
+
+	      var inputPropKey = propsKey || key;
+	      var defaultProps = defaultInputProps[inputPropKey] || {};
+	      var instanceProps = this.props.inputProps[inputPropKey] || {};
+
+	      var _Object$assign = Object.assign(defaultProps, instanceProps),
+	          width = _Object$assign.width,
+	          inputProps = _objectWithoutProperties(_Object$assign, ["width"]);
+
+	      return _react2.default.createElement(
+	        _semanticUiReact.Grid.Column,
+	        {
 	          key: key,
-	          label: value,
-	          placeholder: value,
-	          className: "email-sign-up-${key}",
+	          width: width || defaultColumnWidth
+	        },
+	        _react2.default.createElement(_Input2.default, _extends({
 	          disabled: disabled,
-	          value: _this2.props.auth.getIn(["emailSignUp", _this2.getEndpoint(), "form", key]) || '',
-	          errors: _this2.props.auth.getIn(["emailSignUp", _this2.getEndpoint(), "errors", key]),
-	          onChange: _this2.handleInput.bind(_this2, key) }));
-	        return memo;
-	      }, []);
+	          className: "email-sign-up-" + name,
+	          onChange: this.handleInput.bind(this, key),
+	          errors: this.props.auth.getIn(['emailSignUp', this.getEndpoint(), 'errors', key]),
+	          value: this.props.auth.getIn(['emailSignUp', this.getEndpoint(), 'form', key]) || ''
+	        }, inputProps))
+	      );
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var disabled = this.props.auth.getIn(["user", "isSignedIn"]) || this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "loading"]);
+	      var SubmitButton = this.props.submitComponent;
+	      var disabled = this.props.auth.getIn(['user', 'isSignedIn']) || this.props.auth.getIn(['emailSignUp', this.getEndpoint(), 'loading']);
 
 	      return _react2.default.createElement(
 	        _semanticUiReact.Form,
-	        { className: "redux-auth email-sign-up-form clearfix",
-	          onSubmit: this.handleSubmit.bind(this) },
-	        this.additionalInputs(disabled),
-	        _react2.default.createElement(_Input2.default, _extends({ type: "text",
-	          label: "Email",
-	          placeholder: "Email",
-	          className: "email-sign-up-email",
-	          disabled: disabled,
-	          value: this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "email"]) || '',
-	          errors: this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "email"]),
-	          onChange: this.handleInput.bind(this, "email")
-	        }, this.props.inputProps.email)),
-	        _react2.default.createElement(_Input2.default, _extends({ type: "password",
-	          label: "Password",
-	          placeholder: "Password",
-	          className: "email-sign-up-password",
-	          disabled: disabled,
-	          value: this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "password"]) || '',
-	          errors: this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "password"]),
-	          onChange: this.handleInput.bind(this, "password")
-	        }, this.props.inputProps.password)),
-	        _react2.default.createElement(_Input2.default, _extends({ type: "password",
-	          label: "Password Confirmation",
-	          placeholder: "Password Confirmation",
-	          className: "email-sign-up-password-confirmation",
-	          disabled: disabled,
-	          value: this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "password_confirmation"]) || '',
-	          errors: this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "password_confirmation"]),
-	          onChange: this.handleInput.bind(this, "password_confirmation")
-	        }, this.props.inputProps.passwordConfirmation)),
+	        {
+	          className: "redux-auth email-sign-up-form clearfix",
+	          onSubmit: this.handleSubmit.bind(this)
+	        },
 	        _react2.default.createElement(
-	          _semanticUiReact.Button,
-	          _extends({
-	            fluid: true,
-	            primary: true,
-	            loading: this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "loading"]),
-	            type: "submit",
-	            className: "email-sign-up-submit pull-right",
-	            disabled: disabled,
-	            onClick: this.handleSubmit.bind(this)
-	          }, this.props.inputProps.submit),
-	          "Sign Up"
+	          _semanticUiReact.Container,
+	          null,
+	          _react2.default.createElement(
+	            _semanticUiReact.Segment,
+	            { basic: true },
+	            _react2.default.createElement(
+	              _semanticUiReact.Grid,
+	              { padded: true },
+	              _react2.default.createElement(
+	                _semanticUiReact.Grid.Column,
+	                { className: "fuck", width: 16 },
+	                _react2.default.createElement(
+	                  "h2",
+	                  null,
+	                  "Sign Up"
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _semanticUiReact.Grid,
+	              { padded: true, className: "input-fields" },
+	              this.renderInputFields(this.props.additionalInputs, disabled),
+	              this.renderInput({ key: 'email' }, disabled),
+	              this.renderInput({ key: 'password' }, disabled),
+	              this.renderInput({ key: 'password_confirmation', propsKey: 'passwordConfirmation' }, disabled)
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(_semanticUiReact.Divider, { fitted: true }),
+	        _react2.default.createElement(
+	          _semanticUiReact.Container,
+	          null,
+	          _react2.default.createElement(
+	            _semanticUiReact.Segment,
+	            { basic: true },
+	            _react2.default.createElement(
+	              _semanticUiReact.Grid,
+	              { middle: "true", aligned: "true", padded: true },
+	              _react2.default.createElement(
+	                _semanticUiReact.Grid.Column,
+	                { width: 8, verticalAlign: "middle" },
+	                this.props.callToAction
+	              ),
+	              _react2.default.createElement(
+	                _semanticUiReact.Grid.Column,
+	                { width: 8, verticalAlign: "middle" },
+	                _react2.default.createElement(
+	                  SubmitButton,
+	                  _extends({
+	                    type: "submit",
+	                    floated: "right",
+	                    disabled: disabled,
+	                    onClick: this.handleSubmit.bind(this),
+	                    className: "email-sign-up-submit",
+	                    loading: this.props.auth.getIn(['emailSignUp', this.getEndpoint(), 'loading'])
+	                  }, this.props.inputProps.submit),
+	                  "Create Account"
+	                )
+	              )
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -2682,17 +2750,17 @@
 	    passwordConfirmation: _propTypes2.default.object,
 	    submit: _propTypes2.default.object
 	  }),
-	  additionalInputs: _propTypes2.default.object
+	  additionalInputs: _propTypes2.default.object,
+	  submitComponent: _propTypes2.default.func,
+	  callToAction: _propTypes2.default.node
 	};
 	EmailSignUpForm.defaultProps = {
 	  next: function next() {},
-	  inputProps: {
-	    email: {},
-	    password: {},
-	    submit: {}
-	  },
-	  additionalInputs: {}
+	  inputProps: defaultInputProps,
+	  additionalInputs: {},
+	  submitComponent: _semanticUiReact.Button
 	};
+	exports.PureComponent = EmailSignUpForm;
 	exports.default = (0, _reactRedux.connect)(function (_ref) {
 	  var auth = _ref.auth;
 	  return { auth: auth };
