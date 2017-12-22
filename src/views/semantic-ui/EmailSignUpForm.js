@@ -70,47 +70,51 @@ class EmailSignUpForm extends React.Component {
     );
 
     return (
-      <Form className='redux-auth email-sign-up-form clearfix'
-            onSubmit={this.handleSubmit.bind(this)}>
-
-        {this.additionalInputs(disabled)}
-
+      <Form
+        className='redux-auth email-sign-up-form clearfix'
+        onSubmit={this.handleSubmit.bind(this)}
+      >
+        <Form.Group widths="equal">
+          {this.additionalInputs(disabled)}
+        </Form.Group>
         <Input type="text"
-               label="Email"
-               placeholder="Email"
-               className="email-sign-up-email"
-               disabled={disabled}
-               value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "email"]) || ''}
-               errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "email"])}
-               onChange={this.handleInput.bind(this, "email")}
-               {...this.props.inputProps.email} />
-
-        <Input type="password"
-               label="Password"
-               placeholder="Password"
-               className="email-sign-up-password"
-               disabled={disabled}
-               value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "password"]) || ''}
-               errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "password"])}
-               onChange={this.handleInput.bind(this, "password")}
-               {...this.props.inputProps.password} />
-
-        <Input type="password"
-               label="Password Confirmation"
-               placeholder="Password Confirmation"
-               className="email-sign-up-password-confirmation"
-               disabled={disabled}
-               value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "password_confirmation"]) || ''}
-               errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "password_confirmation"])}
-               onChange={this.handleInput.bind(this, "password_confirmation")}
-               {...this.props.inputProps.passwordConfirmation} />
-
+          label="Email"
+          placeholder="Email"
+          className="email-sign-up-email"
+          disabled={disabled}
+          value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "email"]) || ''}
+          errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "email"])}
+          onChange={this.handleInput.bind(this, "email")}
+          {...this.props.inputProps.email}
+        />
+        <Form.Group widths="equal">
+          <Input type="password"
+            label="Password"
+            placeholder="Password"
+            className="email-sign-up-password"
+            disabled={disabled}
+            value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "password"]) || ''}
+            errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "password"])}
+            onChange={this.handleInput.bind(this, "password")}
+            {...this.props.inputProps.password}
+          />
+          <Input type="password"
+            label="Password Confirmation"
+            placeholder="Password Confirmation"
+            className="email-sign-up-password-confirmation"
+            disabled={disabled}
+            value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "password_confirmation"]) || ''}
+            errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "password_confirmation"])}
+            onChange={this.handleInput.bind(this, "password_confirmation")}
+            {...this.props.inputProps.passwordConfirmation}
+          />
+        </Form.Group>
         <Button
           fluid
           primary
           loading={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "loading"])}
           type="submit"
-          className='email-sign-up-submit pull-right'
+          className="email-sign-up-submit pull-right"
           disabled={disabled}
           onClick={this.handleSubmit.bind(this)}
           {...this.props.inputProps.submit}>
