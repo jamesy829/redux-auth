@@ -11,7 +11,7 @@ class AuthInput extends React.Component {
   };
 
   static defaultProps = {
-    label: "",
+    label: '',
     value: null,
     errors: Immutable.fromJS([])
   };
@@ -28,18 +28,19 @@ class AuthInput extends React.Component {
             return (
               <p
                 className="control-label inline-error-item"
-                style={{paddingLeft: "20px", position: "relative", marginBottom: "28px"}}
+                style={{paddingLeft: '20px', position: 'relative', marginBottom: '5px'}}
                 key={i}
               >
                 <Icon
                   name="attention"
                   style={{
-                          position: "absolute",
-                          left: 0,
-                          top: 2
-                        }}
-                      />{this.props.label} {err}
-                    </p>
+                    position: 'absolute',
+                    left: 0,
+                    top: 2
+                  }}
+                />
+                {this.props.label} {err}
+              </p>
             );
           })}
         </div>
