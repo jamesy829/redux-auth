@@ -44,7 +44,8 @@ export default function() {
     [
       "/views/default",
       "/views/material-ui",
-      "/views/bootstrap"
+      "/views/bootstrap",
+      "/views/semantic-ui"
     ].forEach((theme) => {
       requirePath = `../../src${theme}`;
       var {EmailSignUpForm} = require(requirePath);
