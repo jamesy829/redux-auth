@@ -11,7 +11,7 @@ import updatePasswordModal from "./reducers/update-password-modal";
 import server from "./reducers/server";
 import signOut from "./reducers/sign-out";
 import destroyAccount from "./reducers/destroy-account";
-import {combineReducers} from "redux-immutablejs";
+import { combineReducers } from "redux-immutablejs";
 
 /* reducers */
 export const authStateReducer = combineReducers({
