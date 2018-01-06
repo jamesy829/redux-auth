@@ -1956,7 +1956,9 @@
 	      body: JSON.stringify(body)
 	    }).then(_handleFetchResponse.parseResponse).then(function (user) {
 	      return dispatch(emailSignInComplete(currentEndpointKey, user));
-	    }).catch(function (errors) {
+	    }).catch(function (_ref) {
+	      var errors = _ref.errors;
+
 	      // revert endpoint key to what it was before failed request
 	      (0, _sessionStorage.setCurrentEndpointKey)(prevEndpointKey);
 	      dispatch((0, _configure.storeCurrentEndpointKey)(prevEndpointKey));

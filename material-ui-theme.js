@@ -2185,7 +2185,7 @@
 	              _FlatButton2.default,
 	              _extends({
 	                key: "cancel",
-	                className: "password-reset-success-modal-close",
+	                className: "password-reset-success-modal-close button-secondary",
 	                onClick: this.close.bind(this),
 	                secondary: true
 	              }, this.props.inputProps.cancel),
