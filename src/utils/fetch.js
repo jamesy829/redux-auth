@@ -47,21 +47,19 @@ function getAuthHeaders(url) {
 }
 
 function updateAuthCredentials(resp) {
-  var currentHeaders = retrieveData( C.SAVED_CREDS_KEY ) || {};
-
   // set header for each key in `tokenFormat` config
   var newHeaders = {};
 
   // set flag to ensure that we don't accidentally nuke the headers
   // if the response tokens aren't sent back from the API
-  var blankHeaders = true;
+  var blankHeaders = false;
 
   // set header key + val for each key in `tokenFormat` config
   for (var key in getTokenFormat()) {
-    newHeaders[key] = resp.headers.get(key) || currentHeaders.get(key);
+    newHeaders[key] = resp.headers.get(key);
 
-    if (newHeaders[key]) {
-      blankHeaders = false;
+    if (!newHeaders[key]) {
+      blankHeaders = true;
     }
   }
 
