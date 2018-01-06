@@ -40,6 +40,7 @@ module.exports = {
       "react-redux": "commonjs react-redux",
       "redux": "commonjs redux",
       "lodash": "commonjs lodash",
+      "redux-form": "commonjs redux-form",
       "redux-immutablejs": "commonjs redux-immutablejs",
       "react-router": "commonjs react-router",
       "react-router-redux": "commonjs react-router-redux",

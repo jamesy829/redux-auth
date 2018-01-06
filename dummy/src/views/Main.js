@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import * as BSTheme from "../../../src/views/bootstrap";
 import * as DefaultTheme from "../../../src/views/default";
 import * as MUITheme from "../../../src/views/material-ui";
+import * as SemanticUITheme from "../../../src/views/semantic-ui";
 import Select from "react-select";
 
 
@@ -38,6 +39,10 @@ class Main extends React.Component {
         Theme = BSTheme;
         themePath = "/bootstrap-theme";
         break;
+      case "semantic-ui":
+        Theme = SemanticUITheme;
+        themePath = "/semantic-ui-theme";
+        break;
     }
 
     return (
@@ -59,7 +64,8 @@ class Main extends React.Component {
               options={[
                 {value: "default", label: "Default"},
                 {value: "bootstrap", label: "Bootstrap"},
-                {value: "materialUi", label: "Material UI"}
+                {value: "materialUi", label: "Material UI"},
+                {value: "semantic-ui", label: "Semantic UI"}
               ]}
               onChange={this.updateTheme.bind(this)} />
 
