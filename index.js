@@ -1101,6 +1101,8 @@
 	}
 
 	function updateAuthCredentials(resp) {
+	  var currentHeaders = (0, _sessionStorage.retrieveData)(C.SAVED_CREDS_KEY) || {};
+
 	  // set header for each key in `tokenFormat` config
 	  var newHeaders = {};
 
@@ -1110,7 +1112,7 @@
 
 	  // set header key + val for each key in `tokenFormat` config
 	  for (var key in (0, _sessionStorage.getTokenFormat)()) {
-	    newHeaders[key] = resp.headers.get(key);
+	    newHeaders[key] = resp.headers.get(key) || currentHeaders.get(key);
 
 	    if (newHeaders[key]) {
 	      blankHeaders = false;
