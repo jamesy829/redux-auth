@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Form, Icon } from "semantic-ui-react";
+import InputError from './InputError';
 
 
-class ReduxFormInput extends React.Component {
+class Input extends React.Component {
   static propTypes = {
     input: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -14,24 +15,6 @@ class ReduxFormInput extends React.Component {
     }).isRequired,
   };
 
-  renderErrors () {
-    return (
-      <div className='auth-error-message error'>
-        <p
-          className="control-label inline-error-item"
-          style={{
-            color: '#9f3a38',
-            marginTop: '-10px',
-            marginBottom: '0px',
-          }}
-        >
-          <Icon name="attention" />
-          {this.props.meta.error}
-        </p>
-      </div>
-    );
-  }
-
   render () {
     const { meta, ...inputProps } = this.props;
     const hasError = meta && meta.error && meta.touched;
@@ -39,10 +22,10 @@ class ReduxFormInput extends React.Component {
     return (
       <div>
         <Form.Input {...inputProps} />
-        {hasError && this.renderErrors()}
+        {hasError && <InputError error={meta.error} />}
       </div>
     );
   }
 }
 
-export default ReduxFormInput;
+export default Input;
