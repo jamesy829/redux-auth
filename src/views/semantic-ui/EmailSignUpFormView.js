@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import Input from "./ReduxFormInput";
+import { Field } from 'redux-form/immutable';
 import {
   Form, Button, Divider, Grid, Container, Icon, Segment, Message
 } from "semantic-ui-react";
-import { List, Map } from 'immutable';
-import { Field } from 'redux-form/immutable';
+import Input from "./redux-form-components/Input";
+import FormError from "./redux-form-components/FormError";
 
 
 const defaultInputProps = {
@@ -81,21 +81,16 @@ class EmailSignUpFormView extends React.Component {
     );
   }
 
-  renderError(error, dirty) {
-    return error && dirty && (
+  renderFormError(error) {
+    return (
       <Grid.Column
         key="errors"
         width={16}
       >
-        <div style={{ marginBottom: '10px' }}>
-          <p style={{ color: '#9f3a38' }}>
-            <Icon name="attention" />
-            {error}
-          </p>
-        </div>
+        <FormError error={error} />
       </Grid.Column>
     );
-  }
+  };
 
   render () {
     const { handleSubmit, error, submitting, dirty, valid, isSignedIn } = this.props;
@@ -115,7 +110,7 @@ class EmailSignUpFormView extends React.Component {
               </Grid.Column>
             </Grid>
             <Grid padded className="input-fields">
-              {this.renderError(error, dirty)}
+              {error && dirty && this.renderFormError(error)}
               {this.renderInputFields(this.props.additionalInputs, disabled)}
               {this.renderInput({key: 'email'}, disabled)}
               {this.renderInput({key: 'password'}, disabled)}
