@@ -2900,11 +2900,7 @@
 	  passwordResetErrorModalVisible: false
 	});
 
-	exports.default = (0, _reduxImmutablejs.createReducer)(initialState, (_createReducer = {}, _defineProperty(_createReducer, emailSignInActions.EMAIL_SIGN_IN_COMPLETE, function (state) {
-	  return state.set("emailSignInSuccessModalVisible", true);
-	}), _defineProperty(_createReducer, emailSignInActions.EMAIL_SIGN_IN_ERROR, function (state) {
-	  return state.set("emailSignInErrorModalVisible", true);
-	}), _defineProperty(_createReducer, oAuthSignInActions.OAUTH_SIGN_IN_ERROR, function (state) {
+	exports.default = (0, _reduxImmutablejs.createReducer)(initialState, (_createReducer = {}, _defineProperty(_createReducer, oAuthSignInActions.OAUTH_SIGN_IN_ERROR, function (state) {
 	  return state.merge({
 	    oAuthSignInErrorModalVisible: true,
 	    oAuthSignInLoadingProvider: null
