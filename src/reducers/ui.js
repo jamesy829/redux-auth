@@ -40,9 +40,9 @@ export default createReducer(initialState, {
     "emailSignInSuccessModalVisible", false
   ),
 
-  [emailSignInActions.EMAIL_SIGN_IN_ERROR]: state => state.set(
-    "emailSignInErrorModalVisible", true
-  ),
+  // [emailSignInActions.EMAIL_SIGN_IN_ERROR]: state => state.set(
+  //   "emailSignInErrorModalVisible", true
+  // ),
 
   // [oAuthSignInActions.OAUTH_SIGN_IN_COMPLETE]: state => state.merge({
   //   oAuthSignInSuccessModalVisible: true,
