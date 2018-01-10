@@ -66,9 +66,9 @@ export default createReducer(initialState, {
     "emailSignInErrorModalVisible", false
   ),
 
-  [signOutActions.SIGN_OUT_COMPLETE]: state => state.set(
-    "signOutSuccessModalVisible", true
-  ),
+  // [signOutActions.SIGN_OUT_COMPLETE]: state => state.set(
+  // "signOutSuccessModalVisible", true
+  // ),
 
   [signOutActions.SIGN_OUT_ERROR]: state => state.set(
     "signOutErrorModalVisible", true
