@@ -103,8 +103,8 @@ export default function() {
                 expect(successRespSpy.called).to.be.ok;
 
                 // ensure success modal is present
-                let modalVisible = store.getState().auth.getIn(["ui", "signOutSuccessModalVisible"]);
-                expect(modalVisible).to.equal(true);
+                // let modalVisible = store.getState().auth.getIn(["ui", "signOutSuccessModalVisible"]);
+                // expect(modalVisible).to.equal(true);
 
                 let isSignedIn = store.getState().auth.getIn(["user", "isSignedIn"]);
                 expect(isSignedIn).to.equal(false);
