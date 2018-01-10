@@ -37,7 +37,6 @@ const initialState = Immutable.fromJS({
 
 export default createReducer(initialState, {
   [emailSignInActions.EMAIL_SIGN_IN_COMPLETE]: state => state.set(
-    "emailSignInSuccessModalVisible", true
   ),
 
   [emailSignInActions.EMAIL_SIGN_IN_ERROR]: state => state.set(
@@ -67,7 +66,6 @@ export default createReducer(initialState, {
   ),
 
   [signOutActions.SIGN_OUT_COMPLETE]: state => state.set(
-    "signOutSuccessModalVisible", true
   ),
 
   [signOutActions.SIGN_OUT_ERROR]: state => state.set(
