@@ -46,7 +46,7 @@
     "rc-dialog": "^6.1.1",
     "react-bootstrap": "^0.31.3",
     "react-loader": "^2.4.0",
-    "redux-form": ">=6.8.0",
+    "redux-form": "6.8.0",
     "redux-immutablejs": "0.0.8",
     "semantic-ui-react": "^0.75.1"
   },
