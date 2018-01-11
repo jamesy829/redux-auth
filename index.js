@@ -2901,7 +2901,7 @@
 	});
 
 	exports.default = (0, _reduxImmutablejs.createReducer)(initialState, (_createReducer = {}, _defineProperty(_createReducer, emailSignInActions.EMAIL_SIGN_IN_COMPLETE, function (state) {
-	  return state.set("emailSignInSuccessModalVisible", true);
+	  return state.set("emailSignInSuccessModalVisible", false);
 	}), _defineProperty(_createReducer, emailSignInActions.EMAIL_SIGN_IN_ERROR, function (state) {
 	  return state.set("emailSignInErrorModalVisible", true);
 	}), _defineProperty(_createReducer, oAuthSignInActions.OAUTH_SIGN_IN_ERROR, function (state) {
@@ -2919,7 +2919,7 @@
 	}), _defineProperty(_createReducer, uiActions.HIDE_EMAIL_SIGN_IN_ERROR_MODAL, function (state) {
 	  return state.set("emailSignInErrorModalVisible", false);
 	}), _defineProperty(_createReducer, signOutActions.SIGN_OUT_COMPLETE, function (state) {
-	  return state.set("signOutSuccessModalVisible", true);
+	  return state.set("signOutSuccessModalVisible", false);
 	}), _defineProperty(_createReducer, signOutActions.SIGN_OUT_ERROR, function (state) {
 	  return state.set("signOutErrorModalVisible", true);
 	}), _defineProperty(_createReducer, uiActions.HIDE_SIGN_OUT_SUCCESS_MODAL, function (state) {
