@@ -10,7 +10,7 @@ import {
 } from "./session-storage";
 
 var isApiRequest = function(url) {
-  return (url.match(getApiUrl(getSessionEndpointKey())));
+  return url.match(getApiUrl(getSessionEndpointKey()));
 };
 
 /**
@@ -30,7 +30,7 @@ function getAuthHeaders(url) {
   if (isApiRequest(url)) {
     // fetch current auth headers from storage
     var currentHeaders = retrieveData(C.SAVED_CREDS_KEY) || {},
-        nextHeaders = {};
+      nextHeaders = {};
 
     // bust IE cache
     nextHeaders["If-Modified-Since"] = "Mon, 26 Jul 1997 05:00:00 GMT";
@@ -40,48 +40,57 @@ function getAuthHeaders(url) {
       nextHeaders[key] = currentHeaders[key];
     }
 
-    return addAuthorizationHeader(currentHeaders['access-token'], nextHeaders);
-  } else {
-    return {};
+    return addAuthorizationHeader(currentHeaders["access-token"], nextHeaders);
   }
+
+  return {};
 }
 
 function updateAuthCredentials(resp) {
-  // set header for each key in `tokenFormat` config
-  var newHeaders = {};
+  if (isApiRequest(resp.url)) {
+    const headers = resp.headers;
 
-  // set flag to ensure that we don't accidentally nuke the headers
-  // if the response tokens aren't sent back from the API
-  var blankHeaders = false;
+    // set header for each key in `tokenFormat` config
+    var newHeaders = {};
 
-  // set header key + val for each key in `tokenFormat` config
-  for (var key in getTokenFormat()) {
-    newHeaders[key] = resp.headers.get(key);
+    // set flag to ensure that we don't accidentally nuke the headers
+    // if the response tokens aren't sent back from the API
+    var blankHeaders = true;
 
-    if (!newHeaders[key]) {
-      blankHeaders = true;
+    // set header key + val for each key in `tokenFormat` config
+    for (var key in getTokenFormat()) {
+      if (headers[key] === undefined) {
+        if (headers.get && headers.get(key)) {
+          newHeaders[key] = headers.get(key);
+        }
+      } else {
+        newHeaders[key] = headers[key];
+      }
+
+      if (newHeaders[key]) {
+        blankHeaders = false;
+      }
     }
-  }
 
-  // persist headers for next request
-  if (!blankHeaders) {
-    persistData(C.SAVED_CREDS_KEY, newHeaders);
+    // persist headers for next request
+    if (!blankHeaders) {
+      persistData(C.SAVED_CREDS_KEY, newHeaders);
+    }
   }
 
   return resp;
 }
 
-export default function (url, options={}) {
+export default function(url, options = {}) {
   if (!options.headers) {
-    options.headers = {}
+    options.headers = {};
   }
   extend(options.headers, getAuthHeaders(url));
-  return originalFetch(url, options)
-    .then(resp => {
-      if (isApiRequest( url )) {
-        updateAuthCredentials( resp )
-      }
+  return originalFetch(url, options).then(resp => {
+    if (isApiRequest(url)) {
+      updateAuthCredentials(resp);
+    }
 
-      return resp;
-    });
+    return resp;
+  });
 }

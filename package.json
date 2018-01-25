@@ -21,9 +21,16 @@
   ],
   "main": "index.js",
   "scripts": {
-    "release": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack.release.js",
-    "test": "node_modules/.bin/_mocha --timeout 5000 --compilers .:test/compiler.js test/runner.js",
-    "test-coverage": "node_modules/.bin/babel-node node_modules/.bin/isparta cover --root ./src node_modules/.bin/_mocha -- --timeout 5000 test/runner.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "release":
+      "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack.release.js",
+    "test":
+      "node_modules/.bin/_mocha --timeout 5000 --compilers .:test/compiler.js test/runner.js",
+    "test-coverage":
+      "node_modules/.bin/babel-node node_modules/.bin/isparta cover --root ./src node_modules/.bin/_mocha -- --timeout 5000 test/runner.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "files": [
     "src",
@@ -75,6 +82,7 @@
     "hapi": "9.3.1",
     "highlight.js": "^8.8.0",
     "history": "^4.7.2",
+    "husky": "^0.14.3",
     "imports-loader": "^0.6.4",
     "inert": "3.0.1",
     "install": "^0.3.0",
@@ -88,6 +96,7 @@
     "jsdomify": "^2.1.0",
     "json-loader": "0.5.4",
     "less-loader": "^0.6.2",
+    "lint-staged": "^7.0.0",
     "material-ui": "0.19.4",
     "mocha": "^3.4.2",
     "mockery": "^1.4.0",
@@ -95,6 +104,7 @@
     "node-sass": "^3.3.3",
     "nodemon": "^1.7.2",
     "piping": "0.2.0",
+    "prettier": "1.11.0",
     "react": "^16.1.0",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^16.1.0",
