@@ -1103,8 +1103,6 @@
 	}
 
 	function updateAuthCredentials(resp) {
-	  var currentHeaders = (0, _sessionStorage.retrieveData)(C.SAVED_CREDS_KEY);
-
 	  // set header for each key in `tokenFormat` config
 	  var newHeaders = {};
 
