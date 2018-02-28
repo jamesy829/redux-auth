@@ -717,7 +717,9 @@
                 settings.initialCredentials = (0, _extend2.default)(
                   {},
                   settings.initialCredentials,
-                  { headers: authRedirectHeaders }
+                  {
+                    headers: authRedirectHeaders
+                  }
                 );
               }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
 import ErrorList from "../ErrorList";
 import { connect } from "react-redux";
@@ -17,11 +17,11 @@ class BaseModal extends React.Component {
     closeBtnLabel: "Ok"
   };
 
-  close () {
+  close() {
     this.props.dispatch(this.props.closeAction());
   }
 
-  getEndpoint () {
+  getEndpoint() {
     return (
       this.props.endpoint ||
       this.props.auth.getIn(["configure", "currentEndpointKey"]) ||
@@ -29,23 +29,24 @@ class BaseModal extends React.Component {
     );
   }
 
-  getErrorList () {
+  getErrorList() {
     let [base, ...rest] = this.props.errorAddr;
-    return <ErrorList errors={this.props.auth.getIn([
-      base, this.getEndpoint(), ...rest
-    ])} />
+    return (
+      <ErrorList
+        errors={this.props.auth.getIn([base, this.getEndpoint(), ...rest])}
+      />
+    );
   }
 
-  render () {
-    let body = (this.props.errorAddr)
-      ? this.getErrorList()
-      : this.props.children;
+  render() {
+    let body = this.props.errorAddr ? this.getErrorList() : this.props.children;
 
     return (
       <Modal
         show={this.props.show}
         className={`redux-auth-modal ${this.props.containerClass}`}
-        onHide={this.close.bind(this)}>
+        onHide={this.close.bind(this)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>{this.props.title}</Modal.Title>
         </Modal.Header>
@@ -55,7 +56,8 @@ class BaseModal extends React.Component {
         <Modal.Footer>
           <Button
             onClick={this.close.bind(this)}
-            className={`${this.props.containerClass}-close`}>
+            className={`${this.props.containerClass}-close`}
+          >
             {this.props.closeBtnLabel}
           </Button>
         </Modal.Footer>
@@ -64,4 +66,4 @@ class BaseModal extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(BaseModal);
+export default connect(({ auth }) => ({ auth }))(BaseModal);

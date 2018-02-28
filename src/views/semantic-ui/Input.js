@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Form, Icon } from "semantic-ui-react";
 import Immutable from "immutable";
 
@@ -11,30 +11,34 @@ class AuthInput extends React.Component {
   };
 
   static defaultProps = {
-    label: '',
+    label: "",
     value: null,
     errors: Immutable.fromJS([])
   };
 
-  handleInput (ev) {
+  handleInput(ev) {
     this.props.onChange(ev.target.value);
   }
 
-  renderErrorList () {
+  renderErrorList() {
     if (this.props.errors.size) {
       return (
-        <div className='auth-error-message has-error'>
+        <div className="auth-error-message has-error">
           {this.props.errors.map((err, i) => {
             return (
               <p
                 className="control-label inline-error-item"
-                style={{paddingLeft: '20px', position: 'relative', marginBottom: '5px'}}
+                style={{
+                  paddingLeft: "20px",
+                  position: "relative",
+                  marginBottom: "5px"
+                }}
                 key={i}
               >
                 <Icon
                   name="attention"
                   style={{
-                    position: 'absolute',
+                    position: "absolute",
                     left: 0,
                     top: 2
                   }}
@@ -50,16 +54,11 @@ class AuthInput extends React.Component {
     return <span />;
   }
 
-  render () {
+  render() {
     return (
-      <Form.Field
-        error={(this.props.errors.size) ? "error" : null}
-      >
+      <Form.Field error={this.props.errors.size ? "error" : null}>
         <label>{this.props.label}</label>
-        <input
-          {...this.props}
-          onChange={this.handleInput.bind(this)}
-        />
+        <input {...this.props} onChange={this.handleInput.bind(this)} />
         {this.renderErrorList()}
       </Form.Field>
     );

@@ -1,28 +1,34 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import PropTypes from "prop-types";
+import { Field } from "redux-form/immutable";
 import {
-  Form, Button, Divider, Grid, Container, Icon, Segment, Message
+  Form,
+  Button,
+  Divider,
+  Grid,
+  Container,
+  Icon,
+  Segment,
+  Message
 } from "semantic-ui-react";
 import Input from "./redux-form-components/Input";
 import FormError from "./redux-form-components/FormError";
 
-
 const defaultInputProps = {
   email: {
-    label: 'Email',
-    type: 'email',
+    label: "Email",
+    type: "email"
   },
   password: {
-    label: 'Password',
-    type: 'password',
+    label: "Password",
+    type: "password"
   },
   passwordConfirmation: {
-    label: 'Password Confirmation',
-    type: 'password',
+    label: "Password Confirmation",
+    type: "password"
   },
-  submit: {},
-}
+  submit: {}
+};
 
 class EmailSignUpFormView extends React.Component {
   static propTypes = {
@@ -35,30 +41,30 @@ class EmailSignUpFormView extends React.Component {
       email: PropTypes.object,
       password: PropTypes.object,
       passwordConfirmation: PropTypes.object,
-      submit: PropTypes.object,
+      submit: PropTypes.object
     }),
     isSignedIn: PropTypes.bool,
     next: PropTypes.func,
     submitComponent: PropTypes.func,
     submitting: PropTypes.bool,
-    valid: PropTypes.bool,
+    valid: PropTypes.bool
   };
 
   static defaultProps = {
     additionalInputs: {},
     inputProps: defaultInputProps,
     next: () => {},
-    submitComponent: Button,
+    submitComponent: Button
   };
 
-  renderInputFields (inputFieldsMap, disabled) {
+  renderInputFields(inputFieldsMap, disabled) {
     return Object.keys(inputFieldsMap).map(inputKey => {
       const input = inputFieldsMap[inputKey];
       return this.renderInput(input, disabled);
     });
   }
 
-  renderInput (inputDetails, disabled) {
+  renderInput(inputDetails, disabled) {
     const defaultColumnWidth = 16;
     const { key, propsKey } = inputDetails;
     const inputPropKey = propsKey || key;
@@ -67,10 +73,7 @@ class EmailSignUpFormView extends React.Component {
     const { width, ...inputProps } = Object.assign(defaultProps, instanceProps);
 
     return (
-      <Grid.Column
-        key={key}
-        width={width || defaultColumnWidth}
-      >
+      <Grid.Column key={key} width={width || defaultColumnWidth}>
         <Field
           fluid={Boolean(true)}
           name={key}
@@ -83,18 +86,22 @@ class EmailSignUpFormView extends React.Component {
 
   renderFormError(error) {
     return (
-      <Grid.Column
-        key="errors"
-        width={16}
-      >
+      <Grid.Column key="errors" width={16}>
         <FormError error={error} />
       </Grid.Column>
     );
-  };
+  }
 
-  render () {
-    const { handleSubmit, error, submitting, dirty, valid, isSignedIn } = this.props;
-    const disabled = (!valid || submitting || isSignedIn);
+  render() {
+    const {
+      handleSubmit,
+      error,
+      submitting,
+      dirty,
+      valid,
+      isSignedIn
+    } = this.props;
+    const disabled = !valid || submitting || isSignedIn;
     const SubmitButton = this.props.submitComponent;
 
     return (
@@ -112,9 +119,15 @@ class EmailSignUpFormView extends React.Component {
             <Grid padded className="input-fields">
               {error && dirty && this.renderFormError(error)}
               {this.renderInputFields(this.props.additionalInputs, disabled)}
-              {this.renderInput({key: 'email'}, disabled)}
-              {this.renderInput({key: 'password'}, disabled)}
-              {this.renderInput({key: 'password_confirmation', propsKey: 'passwordConfirmation'}, disabled)}
+              {this.renderInput({ key: "email" }, disabled)}
+              {this.renderInput({ key: "password" }, disabled)}
+              {this.renderInput(
+                {
+                  key: "password_confirmation",
+                  propsKey: "passwordConfirmation"
+                },
+                disabled
+              )}
             </Grid>
           </Segment>
         </Container>

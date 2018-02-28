@@ -10,12 +10,15 @@ const initialState = Immutable.fromJS({
 });
 
 export default createReducer(initialState, {
-  [A.SS_AUTH_TOKEN_UPDATE]: (state, {
-    user = null,
-    headers = null,
-    mustResetPassword = false,
-    firstTimeLogin = false
-  }) => {
+  [A.SS_AUTH_TOKEN_UPDATE]: (
+    state,
+    {
+      user = null,
+      headers = null,
+      mustResetPassword = false,
+      firstTimeLogin = false
+    }
+  ) => {
     return state.merge({
       user,
       headers,

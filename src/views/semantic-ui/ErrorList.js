@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { Icon } from 'semantic-ui-react'
+import PropTypes from "prop-types";
+import { Icon } from "semantic-ui-react";
 import Immutable from "immutable";
 
 class ErrorList extends React.Component {
@@ -12,13 +12,13 @@ class ErrorList extends React.Component {
     errors: Immutable.fromJS([])
   };
 
-  renderErrorList () {
+  renderErrorList() {
     let errorCount = (this.props.errors || Immutable.fromJS([])).size;
 
     if (errorCount > 0) {
       // pluralize message
       let errorWord = "error";
-      errorWord += (errorCount === 1) ? "" : "s";
+      errorWord += errorCount === 1 ? "" : "s";
 
       return (
         <div className="has-error">
@@ -28,8 +28,13 @@ class ErrorList extends React.Component {
               <p
                 key={i}
                 className="control-label modal-error-item"
-                style={{paddingLeft: "20px", position: "relative"}}>
-                <Icon name="attention" style={{position: "absolute", left: 0, top: 2}}/> {err}
+                style={{ paddingLeft: "20px", position: "relative" }}
+              >
+                <Icon
+                  name="attention"
+                  style={{ position: "absolute", left: 0, top: 2 }}
+                />{" "}
+                {err}
               </p>
             );
           })}
@@ -38,19 +43,15 @@ class ErrorList extends React.Component {
     } else {
       return (
         <p>
-        <Icon name="attention"/> There was an error processing
-          this form. Please check each field and try again.
+          <Icon name="attention" /> There was an error processing this form.
+          Please check each field and try again.
         </p>
       );
     }
   }
 
-  render () {
-    return (
-      <div className="auth-error-message">
-        {this.renderErrorList()}
-      </div>
-    );
+  render() {
+    return <div className="auth-error-message">{this.renderErrorList()}</div>;
   }
 }
 

@@ -3,14 +3,15 @@ import { hideUpdatePasswordErrorModal } from "../../../actions/ui";
 import Modal from "./Modal";
 
 class UpdatePasswordErrorModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         show={this.props.show}
         containerClass="update-password-error-modal"
         title="Error"
         closeAction={hideUpdatePasswordErrorModal}
-        errorAddr={["updatePassword", "errors", "full_messages"]} />
+        errorAddr={["updatePassword", "errors", "full_messages"]}
+      />
     );
   }
 }

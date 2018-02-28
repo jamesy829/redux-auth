@@ -4,17 +4,18 @@ import { hideDestroyAccountSuccessModal } from "../../../actions/ui";
 import Modal from "./Modal";
 
 class DestroyAccountSuccessModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         show={this.props.show}
         containerClass="destroy-account-success-modal"
         closeAction={hideDestroyAccountSuccessModal}
-        title="Destroy Account Success">
+        title="Destroy Account Success"
+      >
         <p>{this.props.auth.getIn(["ui", "destroyAccountMessage"])}</p>
       </Modal>
     );
   }
 }
 
-export default connect(({auth}) => ({auth}))(DestroyAccountSuccessModal);
+export default connect(({ auth }) => ({ auth }))(DestroyAccountSuccessModal);

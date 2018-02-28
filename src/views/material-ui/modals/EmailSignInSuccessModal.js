@@ -4,20 +4,21 @@ import { connect } from "react-redux";
 import { hideEmailSignInSuccessModal } from "../../../actions/ui";
 
 class EmailSignInSuccessModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         {...this.props}
         title="Welcome Back"
         closeAction={hideEmailSignInSuccessModal}
-        containerClass="email-sign-in-success-modal">
+        containerClass="email-sign-in-success-modal"
+      >
         <p>
-          You are now signed in
-          as {this.props.auth.getIn(["user", "attributes", "email"])}.
+          You are now signed in as{" "}
+          {this.props.auth.getIn(["user", "attributes", "email"])}.
         </p>
       </Modal>
     );
   }
 }
 
-export default connect(({auth}) => ({auth}))(EmailSignInSuccessModal);
+export default connect(({ auth }) => ({ auth }))(EmailSignInSuccessModal);

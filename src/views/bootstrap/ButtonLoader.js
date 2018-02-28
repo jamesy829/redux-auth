@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Button, Glyphicon } from "react-bootstrap";
 import Spinner from "react-loader";
 
@@ -30,17 +30,23 @@ class ButtonLoader extends React.Component {
     style: {}
   };
 
-  renderIcon () {
+  renderIcon() {
     let icon;
 
     if (this.props.loading) {
-      let spinColor = (!this.props.bsStyle || this.props.bsStyle === "default")
-        ? this.props.spinColorDark
-        : this.props.spinColorLight;
+      let spinColor =
+        !this.props.bsStyle || this.props.bsStyle === "default"
+          ? this.props.spinColorDark
+          : this.props.spinColorLight;
 
       icon = (
         <div>
-          <Spinner ref="spinner" {...this.props.spinConfig} color={spinColor} loaded={false} />
+          <Spinner
+            ref="spinner"
+            {...this.props.spinConfig}
+            color={spinColor}
+            loaded={false}
+          />
         </div>
       );
     } else {
@@ -48,20 +54,22 @@ class ButtonLoader extends React.Component {
     }
 
     return (
-      <div style={{
-        position: "relative",
-        display: "inline-block",
-        marginRight: "6px",
-        width: "10px",
-        height: "10px",
-        top: "1px"
-      }}>
+      <div
+        style={{
+          position: "relative",
+          display: "inline-block",
+          marginRight: "6px",
+          width: "10px",
+          height: "10px",
+          top: "1px"
+        }}
+      >
         {icon}
       </div>
     );
   }
 
-  render () {
+  render() {
     return (
       <Button
         onClick={this.props.onClick}
@@ -70,7 +78,8 @@ class ButtonLoader extends React.Component {
         className={this.props.className}
         type={this.props.type}
         style={this.props.style}
-        bsSize={this.props.bsSize}>
+        bsSize={this.props.bsSize}
+      >
         {this.renderIcon()} {this.props.children}
       </Button>
     );

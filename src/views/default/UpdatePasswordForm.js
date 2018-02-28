@@ -1,8 +1,11 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Input from "./Input";
 import ButtonLoader from "./ButtonLoader";
-import { updatePassword, updatePasswordFormUpdate } from "../../actions/update-password";
+import {
+  updatePassword,
+  updatePasswordFormUpdate
+} from "../../actions/update-password";
 import { connect } from "react-redux";
 
 class UpdatePasswordForm extends React.Component {
@@ -24,7 +27,7 @@ class UpdatePasswordForm extends React.Component {
     }
   };
 
-  getEndpoint () {
+  getEndpoint() {
     return (
       this.props.endpoint ||
       this.props.auth.getIn(["configure", "currentEndpointKey"]) ||
@@ -32,38 +35,52 @@ class UpdatePasswordForm extends React.Component {
     );
   }
 
-  handleInput (key, val) {
+  handleInput(key, val) {
     this.props.dispatch(updatePasswordFormUpdate(this.getEndpoint(), key, val));
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault();
-    let formData = this.props.auth.getIn(["updatePassword", this.getEndpoint(), "form"]).toJS();
+    let formData = this.props.auth
+      .getIn(["updatePassword", this.getEndpoint(), "form"])
+      .toJS();
     this.props.dispatch(updatePassword(formData, this.getEndpoint()));
   }
 
-  render () {
+  render() {
     let endpoint = this.getEndpoint();
     let loading = this.props.auth.getIn(["updatePassword", "loading"]);
-    let disabled = (
-      !this.props.auth.getIn(["user", "isSignedIn"]) || loading ||
-      (this.props.auth.getIn(["user", "attributes", "provider"]) !== "email")
-    );
+    let disabled =
+      !this.props.auth.getIn(["user", "isSignedIn"]) ||
+      loading ||
+      this.props.auth.getIn(["user", "attributes", "provider"]) !== "email";
 
     return (
       <form
         className="redux-auth update-password-form clearfix"
-        onSubmit={this.handleSubmit.bind(this)}>
+        onSubmit={this.handleSubmit.bind(this)}
+      >
         <Input
           type="password"
           label="Password"
           placeholder="Password"
           disabled={disabled}
           className="update-password-password"
-          value={this.props.auth.getIn(["updatePassword", endpoint, "form", "password"])}
-          errors={this.props.auth.getIn(["updatePassword", endpoint, "errors", "password"])}
+          value={this.props.auth.getIn([
+            "updatePassword",
+            endpoint,
+            "form",
+            "password"
+          ])}
+          errors={this.props.auth.getIn([
+            "updatePassword",
+            endpoint,
+            "errors",
+            "password"
+          ])}
           onChange={this.handleInput.bind(this, "password")}
-          {...this.props.inputProps.password} />
+          {...this.props.inputProps.password}
+        />
 
         <Input
           type="password"
@@ -71,10 +88,21 @@ class UpdatePasswordForm extends React.Component {
           placeholder="Password Confirmation"
           className="update-password-password-confirmation"
           disabled={disabled}
-          value={this.props.auth.getIn(["updatePassword", endpoint, "form", "password_confirmation"])}
-          errors={this.props.auth.getIn(["updatePassword", endpoint, "errors", "password_confirmation"])}
+          value={this.props.auth.getIn([
+            "updatePassword",
+            endpoint,
+            "form",
+            "password_confirmation"
+          ])}
+          errors={this.props.auth.getIn([
+            "updatePassword",
+            endpoint,
+            "errors",
+            "password_confirmation"
+          ])}
           onChange={this.handleInput.bind(this, "password_confirmation")}
-          {...this.props.inputProps.passwordConfirmation} />
+          {...this.props.inputProps.passwordConfirmation}
+        />
 
         <ButtonLoader
           loading={loading}
@@ -83,9 +111,10 @@ class UpdatePasswordForm extends React.Component {
           icon={this.props.icon}
           primary={true}
           disabled={disabled}
-          style={{float: "right"}}
+          style={{ float: "right" }}
           onClick={this.handleSubmit.bind(this)}
-          {...this.props.inputProps.submit}>
+          {...this.props.inputProps.submit}
+        >
           Update Password
         </ButtonLoader>
       </form>
@@ -93,4 +122,4 @@ class UpdatePasswordForm extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(UpdatePasswordForm);
+export default connect(({ auth }) => ({ auth }))(UpdatePasswordForm);

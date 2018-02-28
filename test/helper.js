@@ -1,10 +1,10 @@
 import React from "react";
 import TestUtils from "react-addons-test-utils";
-import {Provider} from "react-redux";
-import {Router, Route, IndexRoute} from "react-router";
-import {combineReducers, createStore, compose, applyMiddleware} from "redux";
-import {createMemoryHistory} from "react-router";
-import {routerReducer, routerMiddleware} from "react-router-redux";
+import { Provider } from "react-redux";
+import { Router, Route, IndexRoute } from "react-router";
+import { combineReducers, createStore, compose, applyMiddleware } from "redux";
+import { createMemoryHistory } from "react-router";
+import { routerReducer, routerMiddleware } from "react-router-redux";
 import thunk from "redux-thunk";
 import { configure, authStateReducer } from "../src";
 import Immutable from "immutable";
@@ -29,13 +29,12 @@ class App extends React.Component {
   }
 }
 
-
 export function initialize(
-  endpoint = {apiUrl: "http://api.site.com"},
-  {cookies, isServer, currentLocation} = {}
+  endpoint = { apiUrl: "http://api.site.com" },
+  { cookies, isServer, currentLocation } = {}
 ) {
   var reducer = combineReducers({
-    auth:   authStateReducer,
+    auth: authStateReducer,
     routing: routerReducer,
     demoButtons,
     demoUi
@@ -50,7 +49,7 @@ export function initialize(
     // this will result in a bunch of warnings, but it's not a show stopper
     setTimeout(() => {
       if (!store.getState().auth.getIn(["user", "isSignedIn"])) {
-        transition({pathname: "/login"});
+        transition({ pathname: "/login" });
       }
       if (cb) cb();
     }, 0);
@@ -65,79 +64,84 @@ export function initialize(
     </Route>
   );
 
-  var history = createMemoryHistory('');
+  var history = createMemoryHistory("");
 
   // create the redux store
-  store = compose(
-    applyMiddleware(
-      thunk,
-      routerMiddleware(history)
-    )
-  )(createStore)(reducer);
+  store = compose(applyMiddleware(thunk, routerMiddleware(history)))(
+    createStore
+  )(reducer);
 
   /**
    * The React Router 1.0 routes for both the server and the client.
    */
-  return store.dispatch(configure(endpoint, {
-    cookies,
-    isServer,
-    currentLocation
-  })).then(({redirectPath} = {}) => {
-    return {
-      store,
-      history,
-      routes,
-      redirectPath,
-      provider: (
-        <Provider store={store} key="provider">
-          <Router children={routes} history={history} />
-        </Provider>
-      )
-    };
-  })
-  .catch(err => console.log("@-->init err", err));
+  return store
+    .dispatch(
+      configure(endpoint, {
+        cookies,
+        isServer,
+        currentLocation
+      })
+    )
+    .then(({ redirectPath } = {}) => {
+      return {
+        store,
+        history,
+        routes,
+        redirectPath,
+        provider: (
+          <Provider store={store} key="provider">
+            <Router children={routes} history={history} />
+          </Provider>
+        )
+      };
+    })
+    .catch(err => console.log("@-->init err", err));
 }
 
-
-export function genStore(initialState={}) {
+export function genStore(initialState = {}) {
   // merge all relevant reducers
-  let reducer = combineReducers({auth: authStateReducer});
+  let reducer = combineReducers({ auth: authStateReducer });
 
   // set initial state
   let auth = Immutable.fromJS(initialState);
 
   // create the redux store
-  return compose(applyMiddleware(thunk))(createStore)(reducer, {auth});
+  return compose(applyMiddleware(thunk))(createStore)(reducer, { auth });
 }
 
-export function p () {
+export function p() {
   return new Promise(res => {
     setTimeout(res, 100);
   });
 }
 
-export function renderConnectedComponent(markup, endpointConfig, initialState={}) {
+export function renderConnectedComponent(
+  markup,
+  endpointConfig,
+  initialState = {}
+) {
   // must re-require TestUtils because of mockery
   var store = genStore(initialState);
 
-  return store.dispatch(configure(endpointConfig)).then(() => {
-    return {
-      store,
-      instance: TestUtils.renderIntoDocument(
-        <Provider store={store}>
-          {markup}
-        </Provider>
-      )
-    };
-  }).catch(e => console.log("@-->render error", e.stack));
+  return store
+    .dispatch(configure(endpointConfig))
+    .then(() => {
+      return {
+        store,
+        instance: TestUtils.renderIntoDocument(
+          <Provider store={store}>{markup}</Provider>
+        )
+      };
+    })
+    .catch(e => console.log("@-->render error", e.stack));
 }
 
-export function mockFetchResponse(url, status=200, body={}, headers={}) {
+export function mockFetchResponse(url, status = 200, body = {}, headers = {}) {
   return Promise.resolve({
     url,
     status,
     headers: {
-      get: (key) => headers[key]
+      get: key => headers[key]
     },
     json: () => Promise.resolve(body)
   });

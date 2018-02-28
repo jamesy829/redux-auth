@@ -2,8 +2,8 @@ import * as C from "./constants";
 import extend from "extend";
 import fetch from "./fetch";
 import parseEndpointConfig from "./parse-endpoint-config";
-import {parseResponse} from "./handle-fetch-response";
-import {setEndpointKeys} from "../actions/configure";
+import { parseResponse } from "./handle-fetch-response";
+import { setEndpointKeys } from "../actions/configure";
 import {
   getApiUrl,
   getCurrentSettings,
@@ -21,34 +21,36 @@ import {
 var root = Function("return this")() || (42, eval)("this");
 
 const defaultSettings = {
-  proxyIf:            function() { return false; },
-  proxyUrl:           "/proxy",
-  forceHardRedirect:  false,
-  storage:            "cookies",
-  cookieExpiry:       14,
-  cookiePath:         "/",
+  proxyIf: function() {
+    return false;
+  },
+  proxyUrl: "/proxy",
+  forceHardRedirect: false,
+  storage: "cookies",
+  cookieExpiry: 14,
+  cookiePath: "/",
   initialCredentials: null,
 
   passwordResetSuccessUrl: function() {
     return root.location.href;
   },
 
-  confirmationSuccessUrl:  function() {
+  confirmationSuccessUrl: function() {
     return root.location.href;
   },
 
   tokenFormat: {
     "access-token": "{{ access-token }}",
-    "token-type":   "Bearer",
-    client:         "{{ client }}",
-    expiry:         "{{ expiry }}",
-    uid:            "{{ uid }}",
+    "token-type": "Bearer",
+    client: "{{ client }}",
+    expiry: "{{ expiry }}",
+    uid: "{{ uid }}",
     "resource-class": "{{ resource-class }}"
   },
 
-  parseExpiry: function(headers){
+  parseExpiry: function(headers) {
     // convert from ruby time (seconds) to js time (millis)
-    return (parseInt(headers["expiry"], 10) * 1000) || null;
+    return parseInt(headers["expiry"], 10) * 1000 || null;
   },
 
   handleLoginResponse: function(resp) {
@@ -65,7 +67,12 @@ const defaultSettings = {
 };
 
 // save session configuration
-export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}) {
+export function applyConfig({
+  dispatch,
+  endpoint = {},
+  settings = {},
+  reset = false
+} = {}) {
   let currentEndpointKey;
 
   if (reset) {
@@ -78,8 +85,9 @@ export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}
 
   setCurrentSettings(extend({}, defaultSettings, settings));
 
-  let {defaultEndpointKey, currentEndpoint} = parseEndpointConfig(
-    endpoint, getInitialEndpointKey()
+  let { defaultEndpointKey, currentEndpoint } = parseEndpointConfig(
+    endpoint,
+    getInitialEndpointKey()
   );
 
   if (!currentEndpointKey) {
@@ -90,7 +98,13 @@ export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}
   setDefaultEndpointKey(defaultEndpointKey);
   setCurrentEndpoint(currentEndpoint);
 
-  dispatch(setEndpointKeys(Object.keys(currentEndpoint), currentEndpointKey, defaultEndpointKey));
+  dispatch(
+    setEndpointKeys(
+      Object.keys(currentEndpoint),
+      currentEndpointKey,
+      defaultEndpointKey
+    )
+  );
   setCurrentEndpointKey(currentEndpointKey);
 
   let savedCreds = retrieveData(C.SAVED_CREDS_KEY);
@@ -99,24 +113,30 @@ export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}
     // skip initial headers check (i.e. check was already done server-side)
     let { headers } = getCurrentSettings().initialCredentials;
     persistData(C.SAVED_CREDS_KEY, headers);
-    return fetch(`${getApiUrl(currentEndpointKey)}${currentEndpoint[currentEndpointKey].tokenValidationPath}`)
-    .then(response => {
-          return parseResponse(response,
-                               () => (removeData(C.SAVED_CREDS_KEY)))
-                               .then(({data}) => (data));
+    return fetch(
+      `${getApiUrl(currentEndpointKey)}${
+        currentEndpoint[currentEndpointKey].tokenValidationPath
+      }`
+    ).then(response => {
+      return parseResponse(response, () => removeData(C.SAVED_CREDS_KEY)).then(
+        ({ data }) => data
+      );
     });
   } else if (savedCreds) {
     // retrieve exisiting resource type from local storage
     let resourceClass = savedCreds["resource-class"];
 
     // verify session credentials with API
-    return fetch(`${getApiUrl(currentEndpointKey)}${currentEndpoint[currentEndpointKey].tokenValidationPath}?resource_class=${resourceClass}`)
-    .then(response => {
-          return parseResponse(response,
-                               () => (removeData(C.SAVED_CREDS_KEY)))
-                               .then(({data}) => (data));
+    return fetch(
+      `${getApiUrl(currentEndpointKey)}${
+        currentEndpoint[currentEndpointKey].tokenValidationPath
+      }?resource_class=${resourceClass}`
+    ).then(response => {
+      return parseResponse(response, () => removeData(C.SAVED_CREDS_KEY)).then(
+        ({ data }) => data
+      );
     });
   } else {
-    return Promise.reject({reason: "No credentials."})
+    return Promise.reject({ reason: "No credentials." });
   }
 }

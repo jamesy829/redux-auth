@@ -1,12 +1,18 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import PropTypes from "prop-types";
+import { Field } from "redux-form/immutable";
 import {
-  Form, Button, Divider, Grid, Container, Icon, Segment, Message
+  Form,
+  Button,
+  Divider,
+  Grid,
+  Container,
+  Icon,
+  Segment,
+  Message
 } from "semantic-ui-react";
 import Input from "./redux-form-components/Input";
 import FormError from "./redux-form-components/FormError";
-
 
 class EmailSignInForm extends React.Component {
   static propTypes = {
@@ -17,7 +23,7 @@ class EmailSignInForm extends React.Component {
       submit: PropTypes.object
     }),
     next: PropTypes.func,
-    submitComponent: PropTypes.func,
+    submitComponent: PropTypes.func
   };
 
   static defaultProps = {
@@ -27,31 +33,34 @@ class EmailSignInForm extends React.Component {
       submit: {}
     },
     next: () => {},
-    submitComponent: Button,
+    submitComponent: Button
   };
 
   renderFormError(error) {
     return (
-      <Grid.Column
-        key="errors"
-        width={16}
-      >
+      <Grid.Column key="errors" width={16}>
         <FormError error={error} />
       </Grid.Column>
     );
-  };
+  }
 
-  render () {
+  render() {
     const {
-      handleSubmit, error, submitting, dirty, valid, isSignedIn, inputProps,
+      handleSubmit,
+      error,
+      submitting,
+      dirty,
+      valid,
+      isSignedIn,
+      inputProps,
       submitComponent
     } = this.props;
-    const disabled = (!valid || submitting || isSignedIn);
+    const disabled = !valid || submitting || isSignedIn;
     const SubmitButton = submitComponent;
 
     return (
       <Form
-        className='redux-auth email-sign-in-form clearfix'
+        className="redux-auth email-sign-in-form clearfix"
         onSubmit={handleSubmit}
       >
         <Container>
@@ -63,10 +72,7 @@ class EmailSignInForm extends React.Component {
             </Grid>
             <Grid padded className="input-fields">
               {error && dirty && this.renderFormError(error)}
-              <Grid.Column
-                key="email"
-                width={16}
-              >
+              <Grid.Column key="email" width={16}>
                 <Field
                   component={Input}
                   fluid={Boolean(true)}
@@ -76,10 +82,7 @@ class EmailSignInForm extends React.Component {
                   {...inputProps.email}
                 />
               </Grid.Column>
-              <Grid.Column
-                key="password"
-                width={16}
-              >
+              <Grid.Column key="password" width={16}>
                 <Field
                   component={Input}
                   fluid={Boolean(true)}

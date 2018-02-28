@@ -4,19 +4,18 @@ import { connect } from "react-redux";
 import Modal from "./Modal";
 
 class EmailSignUpSuccessModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         containerClass="email-sign-up-success-modal"
         show={this.props.show}
         closeAction={hideEmailSignUpSuccessModal}
-        title="Sign Up Success">
-        <p>
-          Welcome to TopicDNA
-        </p>
+        title="Sign Up Success"
+      >
+        <p>Welcome to TopicDNA</p>
       </Modal>
     );
   }
 }
 
-export default connect(({auth}) => ({auth}))(EmailSignUpSuccessModal);
+export default connect(({ auth }) => ({ auth }))(EmailSignUpSuccessModal);

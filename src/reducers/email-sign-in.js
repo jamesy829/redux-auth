@@ -10,23 +10,29 @@ const initialState = {
 };
 
 export default createReducer(Immutable.fromJS({}), {
-  [SET_ENDPOINT_KEYS]: (state, {endpoints}) => state.merge(endpoints.reduce((coll, k) => {
-    coll[k] = Immutable.fromJS(initialState);
-    return coll;
-  }, {})),
+  [SET_ENDPOINT_KEYS]: (state, { endpoints }) =>
+    state.merge(
+      endpoints.reduce((coll, k) => {
+        coll[k] = Immutable.fromJS(initialState);
+        return coll;
+      }, {})
+    ),
 
-  [A.EMAIL_SIGN_IN_START]: (state, {endpoint}) => state.setIn([endpoint, "loading"], true),
+  [A.EMAIL_SIGN_IN_START]: (state, { endpoint }) =>
+    state.setIn([endpoint, "loading"], true),
 
-  [A.EMAIL_SIGN_IN_COMPLETE]: (state, {endpoint}) => state.merge({[endpoint]: initialState}),
+  [A.EMAIL_SIGN_IN_COMPLETE]: (state, { endpoint }) =>
+    state.merge({ [endpoint]: initialState }),
 
-  [A.EMAIL_SIGN_IN_ERROR]: (state, {endpoint, errors}) => state.mergeDeep({
-    [endpoint]: {
-      loading: false,
-      errors
-    }
-  }),
+  [A.EMAIL_SIGN_IN_ERROR]: (state, { endpoint, errors }) =>
+    state.mergeDeep({
+      [endpoint]: {
+        loading: false,
+        errors
+      }
+    }),
 
-  [A.EMAIL_SIGN_IN_FORM_UPDATE]: (state, {endpoint, key, value}) => {
+  [A.EMAIL_SIGN_IN_FORM_UPDATE]: (state, { endpoint, key, value }) => {
     return state.mergeDeep({
       [endpoint]: {
         form: {

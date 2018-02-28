@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Glyphicon } from "react-bootstrap";
 import Immutable from "immutable";
 
@@ -12,13 +12,13 @@ class ErrorList extends React.Component {
     errors: Immutable.fromJS([])
   };
 
-  renderErrorList () {
+  renderErrorList() {
     let errorCount = (this.props.errors || Immutable.fromJS([])).size;
 
     if (errorCount > 0) {
       // pluralize message
       let errorWord = "error";
-      errorWord += (errorCount === 1) ? "" : "s";
+      errorWord += errorCount === 1 ? "" : "s";
 
       return (
         <div className="has-error">
@@ -28,9 +28,13 @@ class ErrorList extends React.Component {
               <p
                 key={i}
                 className="control-label modal-error-item"
-                style={{paddingLeft: "20px", position: "relative"}}>
-                <Glyphicon glyph="exclamation-sign"
-                           style={{position: "absolute", left: 0, top: 2}} /> {err}
+                style={{ paddingLeft: "20px", position: "relative" }}
+              >
+                <Glyphicon
+                  glyph="exclamation-sign"
+                  style={{ position: "absolute", left: 0, top: 2 }}
+                />{" "}
+                {err}
               </p>
             );
           })}
@@ -46,12 +50,8 @@ class ErrorList extends React.Component {
     }
   }
 
-  render () {
-    return (
-      <div className="auth-error-message">
-        {this.renderErrorList()}
-      </div>
-    );
+  render() {
+    return <div className="auth-error-message">{this.renderErrorList()}</div>;
   }
 }
 

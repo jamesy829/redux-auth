@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import ErrorList from "../ErrorList";
 import { connect } from "react-redux";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 class BaseModal extends React.Component {
   static propTypes = {
@@ -22,11 +22,11 @@ class BaseModal extends React.Component {
     actions: []
   };
 
-  close () {
+  close() {
     this.props.dispatch(this.props.closeAction());
   }
 
-  getEndpoint () {
+  getEndpoint() {
     return (
       this.props.endpoint ||
       this.props.auth.getIn(["configure", "currentEndpointKey"]) ||
@@ -34,17 +34,17 @@ class BaseModal extends React.Component {
     );
   }
 
-  getErrorList () {
+  getErrorList() {
     let [base, ...rest] = this.props.errorAddr;
-    return <ErrorList errors={this.props.auth.getIn([
-      base, this.getEndpoint(), ...rest
-    ])} />
+    return (
+      <ErrorList
+        errors={this.props.auth.getIn([base, this.getEndpoint(), ...rest])}
+      />
+    );
   }
 
-  render () {
-    let body = (this.props.errorAddr)
-      ? this.getErrorList()
-      : this.props.children;
+  render() {
+    let body = this.props.errorAddr ? this.getErrorList() : this.props.children;
 
     return (
       <MuiThemeProvider>
@@ -56,11 +56,13 @@ class BaseModal extends React.Component {
             <FlatButton
               key="close"
               className={`${this.props.containerClass}-close`}
-              onClick={this.close.bind(this)}>
+              onClick={this.close.bind(this)}
+            >
               {this.props.closeBtnLabel}
             </FlatButton>,
             ...this.props.actions
-          ]}>
+          ]}
+        >
           {body}
         </Dialog>
       </MuiThemeProvider>
@@ -68,4 +70,4 @@ class BaseModal extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(BaseModal);
+export default connect(({ auth }) => ({ auth }))(BaseModal);

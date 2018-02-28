@@ -3,13 +3,14 @@ import { hideSignOutSuccessModal } from "../../../actions/ui";
 import Modal from "./Modal";
 
 class SignOutSuccessModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         {...this.props}
         containerClass="sign-out-success-modal"
         closeAction={hideSignOutSuccessModal}
-        title="Goodbye!">
+        title="Goodbye!"
+      >
         You have been successfully signed out.
       </Modal>
     );

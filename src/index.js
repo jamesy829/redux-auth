@@ -31,18 +31,27 @@ export const authStateReducer = combineReducers({
 });
 
 /* actions */
-export {configure} from "./actions/configure";
-export {authenticate} from "./actions/authenticate";
-export {emailSignIn, emailSignInFormUpdate} from "./actions/email-sign-in";
-export {signOut} from "./actions/sign-out";
-export {emailSignUp, emailSignUpFormUpdate} from "./actions/email-sign-up";
-export {oAuthSignIn} from "./actions/oauth-sign-in";
-export {requestPasswordReset, requestPasswordResetFormUpdate} from "./actions/request-password-reset";
-export {updatePassword, updatePasswordFormUpdate} from "./actions/update-password";
-export {updatePasswordModal, updatePasswordModalFormUpdate} from "./actions/update-password-modal";
-export {destroyAccount} from "./actions/destroy-account";
+export { configure } from "./actions/configure";
+export { authenticate } from "./actions/authenticate";
+export { emailSignIn, emailSignInFormUpdate } from "./actions/email-sign-in";
+export { signOut } from "./actions/sign-out";
+export { emailSignUp, emailSignUpFormUpdate } from "./actions/email-sign-up";
+export { oAuthSignIn } from "./actions/oauth-sign-in";
+export {
+  requestPasswordReset,
+  requestPasswordResetFormUpdate
+} from "./actions/request-password-reset";
+export {
+  updatePassword,
+  updatePasswordFormUpdate
+} from "./actions/update-password";
+export {
+  updatePasswordModal,
+  updatePasswordModalFormUpdate
+} from "./actions/update-password-modal";
+export { destroyAccount } from "./actions/destroy-account";
 export verifyAuth from "./utils/verify-auth";
-export {getApiUrl} from "./utils/session-storage";
+export { getApiUrl } from "./utils/session-storage";
 export {
   hideEmailSignInSuccessModal,
   hideEmailSignInErrorModal,
@@ -69,5 +78,5 @@ export {
 } from "./actions/ui";
 
 /* utils */
-export {default as fetch} from "./utils/fetch";
-import {parseResponse} from "./utils/handle-fetch-response";
+export { default as fetch } from "./utils/fetch";
+import { parseResponse } from "./utils/handle-fetch-response";

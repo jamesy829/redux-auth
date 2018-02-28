@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ButtonLoader from "./ButtonLoader";
 import { Icon } from "semantic-ui-react";
@@ -24,7 +24,7 @@ class OAuthSignInButton extends React.Component {
     next: () => {}
   };
 
-  getEndpoint () {
+  getEndpoint() {
     return (
       this.props.endpoint ||
       this.props.auth.getIn(["configure", "currentEndpointKey"]) ||
@@ -32,32 +32,37 @@ class OAuthSignInButton extends React.Component {
     );
   }
 
-  handleClick () {
-    this.props.dispatch(oAuthSignIn({
-      provider: this.props.provider,
-      params: this.props.signInParams,
-      endpointKey: this.getEndpoint()
-    }))
+  handleClick() {
+    this.props
+      .dispatch(
+        oAuthSignIn({
+          provider: this.props.provider,
+          params: this.props.signInParams,
+          endpointKey: this.getEndpoint()
+        })
+      )
       .then(this.props.next)
       .catch(() => {});
   }
 
-  render () {
-    let disabled = this.props.disabled || this.props.auth.getIn(["user", "isSignedIn"]);
-    let loading = (
-      (this.props.auth.getIn(["ui", "oAuthSignInLoadingProvider"]) === this.props.provider) &&
-      this.props.auth.getIn(["oAuthSignIn", this.getEndpoint(), "loading"])
-    );
+  render() {
+    let disabled =
+      this.props.disabled || this.props.auth.getIn(["user", "isSignedIn"]);
+    let loading =
+      this.props.auth.getIn(["ui", "oAuthSignInLoadingProvider"]) ===
+        this.props.provider &&
+      this.props.auth.getIn(["oAuthSignIn", this.getEndpoint(), "loading"]);
 
     return (
       <ButtonLoader
         loading={this.props.loading || loading}
-        className={this.props.className + ' oauth-sign-in-submit'}
+        className={this.props.className + " oauth-sign-in-submit"}
         disabled={disabled}
         onClick={this.handleClick.bind(this)}
-        {...this.props} />
+        {...this.props}
+      />
     );
   }
 }
 
-export default connect(({auth}) => ({auth}))(OAuthSignInButton);
+export default connect(({ auth }) => ({ auth }))(OAuthSignInButton);

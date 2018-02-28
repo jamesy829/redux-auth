@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import ButtonLoader from "./ButtonLoader";
 import { connect } from "react-redux";
 import { signOut } from "../../actions/sign-out";
@@ -17,7 +17,7 @@ class SignOutButton extends React.Component {
     children: <span>Sign Out</span>
   };
 
-  getEndpoint () {
+  getEndpoint() {
     return (
       this.props.endpoint ||
       this.props.auth.getIn(["configure", "currentEndpointKey"]) ||
@@ -25,25 +25,31 @@ class SignOutButton extends React.Component {
     );
   }
 
-  handleClick () {
-    this.props.dispatch(signOut(this.getEndpoint()))
+  handleClick() {
+    this.props
+      .dispatch(signOut(this.getEndpoint()))
       .then(this.props.next)
       .catch(() => {});
   }
 
-  render () {
+  render() {
     let disabled = !this.props.auth.getIn(["user", "isSignedIn"]);
     return (
       <ButtonLoader
-        loading={this.props.auth.getIn(["signOut", this.getEndpoint(), "loading"])}
+        loading={this.props.auth.getIn([
+          "signOut",
+          this.getEndpoint(),
+          "loading"
+        ])}
         icon={this.props.icon}
         disabled={disabled}
         primary={true}
         className="sign-out-submit"
         onClick={this.handleClick.bind(this)}
-        {...this.props} />
+        {...this.props}
+      />
     );
   }
 }
 
-export default connect(({auth}) => ({auth}))(SignOutButton);
+export default connect(({ auth }) => ({ auth }))(SignOutButton);

@@ -1,7 +1,7 @@
 import React from "react";
 import TestUtils from "react-addons-test-utils";
 import sinon from "sinon";
-import {expect} from "chai";
+import { expect } from "chai";
 
 var ButtonLoader;
 
@@ -12,18 +12,16 @@ function getButtonClass(container, klass) {
 
 export default function() {
   describe("ButtonLoader", () => {
-    [
-      "bootstrap",
-      "default",
-      "material-ui"
-    ].forEach((theme) => {
-      var requirePath = `../../src/views/${theme}/ButtonLoader`
+    ["bootstrap", "default", "material-ui"].forEach(theme => {
+      var requirePath = `../../src/views/${theme}/ButtonLoader`;
 
       describe(`${theme} theme`, () => {
         ButtonLoader = require(requirePath).default;
 
         it("passes props to button", () => {
-          let iconOverride = <span className="icon-override">icon override</span>;
+          let iconOverride = (
+            <span className="icon-override">icon override</span>
+          );
           let clickFn = sinon.spy();
 
           let buttonLoader = TestUtils.renderIntoDocument(
@@ -32,23 +30,37 @@ export default function() {
               icon={iconOverride}
               type="submit"
               onClick={clickFn}
-              bsSize="large">
+              bsSize="large"
+            >
               <span className="content-override">content override</span>
             </ButtonLoader>
           );
 
           // was icon overridden?
-          expect(TestUtils.findRenderedDOMComponentWithClass(buttonLoader, "icon-override"));
+          expect(
+            TestUtils.findRenderedDOMComponentWithClass(
+              buttonLoader,
+              "icon-override"
+            )
+          );
 
           // was content overridden?
-          expect(TestUtils.findRenderedDOMComponentWithClass(buttonLoader, "content-override"));
+          expect(
+            TestUtils.findRenderedDOMComponentWithClass(
+              buttonLoader,
+              "content-override"
+            )
+          );
 
           let btnClass = getButtonClass(buttonLoader, "class-override");
 
           // were class and style overridden?
           expect(btnClass).to.match(/class-override/);
 
-          let btnEl = TestUtils.findRenderedDOMComponentWithTag(buttonLoader, "button");
+          let btnEl = TestUtils.findRenderedDOMComponentWithTag(
+            buttonLoader,
+            "button"
+          );
 
           // was type overridden?
           expect(btnEl.getAttribute("type")).to.equal("submit");
@@ -65,7 +77,10 @@ export default function() {
             <ButtonLoader disabled={true} onClick={clickFn} />
           );
 
-          let btnEl = TestUtils.findRenderedDOMComponentWithTag(buttonLoader, "button");
+          let btnEl = TestUtils.findRenderedDOMComponentWithTag(
+            buttonLoader,
+            "button"
+          );
 
           // was onClick defined?
           TestUtils.Simulate.click(btnEl);
@@ -78,7 +93,8 @@ export default function() {
               onClick={() => {}}
               loading={true}
               spinColorDark="purple"
-              spinColorLight="pink" />
+              spinColorLight="pink"
+            />
           );
 
           expect(buttonLoader.refs.spinner);
@@ -92,7 +108,8 @@ export default function() {
               loading={true}
               bsStyle="primary"
               spinColorDark="purple"
-              spinColorLight="purple" />
+              spinColorLight="purple"
+            />
           );
 
           expect(buttonLoader.refs.spinner.props.color).to.match(/purple/);

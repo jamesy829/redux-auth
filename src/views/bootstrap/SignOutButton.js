@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import ButtonLoader from "./ButtonLoader";
 import { Glyphicon } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -18,7 +18,7 @@ class SignOutButton extends React.Component {
     icon: <Glyphicon glyph="log-out" />
   };
 
-  getEndpoint () {
+  getEndpoint() {
     return (
       this.props.endpoint ||
       this.props.auth.getIn(["configure", "currentEndpointKey"]) ||
@@ -26,24 +26,30 @@ class SignOutButton extends React.Component {
     );
   }
 
-  handleClick () {
-    this.props.dispatch(signOut(this.getEndpoint()))
+  handleClick() {
+    this.props
+      .dispatch(signOut(this.getEndpoint()))
       .then(this.props.next)
       .catch(() => {});
   }
 
-  render () {
+  render() {
     let disabled = !this.props.auth.getIn(["user", "isSignedIn"]);
     return (
       <ButtonLoader
-        loading={this.props.auth.getIn(["signOut", this.getEndpoint(), "loading"])}
+        loading={this.props.auth.getIn([
+          "signOut",
+          this.getEndpoint(),
+          "loading"
+        ])}
         icon={this.props.icon}
         disabled={disabled}
         className="sign-out-submit"
         onClick={this.handleClick.bind(this)}
-        {...this.props} />
+        {...this.props}
+      />
     );
   }
 }
 
-export default connect(({auth}) => ({auth}))(SignOutButton);
+export default connect(({ auth }) => ({ auth }))(SignOutButton);

@@ -11,7 +11,7 @@ const initialState = Immutable.fromJS({
 export default createReducer(initialState, {
   [A.AUTHENTICATE_START]: state => state.set("loading", true),
 
-  [A.AUTHENTICATE_COMPLETE]: (state) => {
+  [A.AUTHENTICATE_COMPLETE]: state => {
     return state.merge({
       loading: false,
       errors: null,
@@ -19,9 +19,10 @@ export default createReducer(initialState, {
     });
   },
 
-  [A.AUTHENTICATE_ERROR]: state => state.merge({
-    loading: false,
-    errors: "Invalid token",
-    valid: false
-  })
+  [A.AUTHENTICATE_ERROR]: state =>
+    state.merge({
+      loading: false,
+      errors: "Invalid token",
+      valid: false
+    })
 });

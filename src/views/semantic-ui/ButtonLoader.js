@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react'
+import PropTypes from "prop-types";
+import { Button } from "semantic-ui-react";
 import Spinner from "react-loader";
 
 class ButtonLoader extends React.Component {
@@ -28,7 +28,7 @@ class ButtonLoader extends React.Component {
     style: {}
   };
 
-  render () {
+  render() {
     return (
       <Button
         circular={this.props.circular}
@@ -42,8 +42,7 @@ class ButtonLoader extends React.Component {
         type={this.props.type}
         size={this.props.size}
         content={this.props.content}
-      >
-      </Button>
+      />
     );
   }
 }

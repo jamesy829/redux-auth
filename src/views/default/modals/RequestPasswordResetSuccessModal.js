@@ -4,13 +4,14 @@ import { hidePasswordResetRequestSuccessModal } from "../../../actions/ui";
 import Modal from "./Modal";
 
 class RequestPasswordResetSuccessModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         show={this.props.show}
         containerClass="request-password-reset-success-modal"
         title="Password Reset Request Success"
-        closeAction={hidePasswordResetRequestSuccessModal}>
+        closeAction={hidePasswordResetRequestSuccessModal}
+      >
         <p>
           {this.props.auth.getIn(["ui", "requestPasswordResetSuccessMessage"])}
         </p>
@@ -19,4 +20,6 @@ class RequestPasswordResetSuccessModal extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(RequestPasswordResetSuccessModal);
+export default connect(({ auth }) => ({ auth }))(
+  RequestPasswordResetSuccessModal
+);

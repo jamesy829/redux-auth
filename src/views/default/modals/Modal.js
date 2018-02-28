@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Dialog from "rc-dialog";
 import ErrorList from "../ErrorList";
 import { connect } from "react-redux";
@@ -18,11 +18,11 @@ class BaseModal extends React.Component {
     closeBtnLabel: "Ok"
   };
 
-  close () {
+  close() {
     this.props.dispatch(this.props.closeAction());
   }
 
-  getEndpoint () {
+  getEndpoint() {
     return (
       this.props.endpoint ||
       this.props.auth.getIn(["configure", "currentEndpointKey"]) ||
@@ -30,43 +30,42 @@ class BaseModal extends React.Component {
     );
   }
 
-  getErrorList () {
+  getErrorList() {
     let [base, ...rest] = this.props.errorAddr;
-    return <ErrorList errors={this.props.auth.getIn([
-      base, this.getEndpoint(), ...rest
-    ])} />
+    return (
+      <ErrorList
+        errors={this.props.auth.getIn([base, this.getEndpoint(), ...rest])}
+      />
+    );
   }
 
-  render () {
-    let body = (this.props.errorAddr)
-      ? this.getErrorList()
-      : this.props.children;
+  render() {
+    let body = this.props.errorAddr ? this.getErrorList() : this.props.children;
 
-    return (this.props.show)
-      ? (
-        <Dialog
-          visible={this.props.show}
-          className={`redux-auth-modal ${this.props.containerClass}`}
-          title={this.props.title}
-          onClose={this.close.bind(this)}>
+    return this.props.show ? (
+      <Dialog
+        visible={this.props.show}
+        className={`redux-auth-modal ${this.props.containerClass}`}
+        title={this.props.title}
+        onClose={this.close.bind(this)}
+      >
+        <div>
+          <div className="redux-auth-modal-body">{body}</div>
 
-          <div>
-            <div className="redux-auth-modal-body">
-              {body}
-            </div>
-
-            <div className="redux-auth-modal-footer">
-              <button
-                onClick={this.close.bind(this)}
-                className={`${this.props.containerClass}-close`}>
-                {this.props.closeBtnLabel}
-              </button>
-            </div>
+          <div className="redux-auth-modal-footer">
+            <button
+              onClick={this.close.bind(this)}
+              className={`${this.props.containerClass}-close`}
+            >
+              {this.props.closeBtnLabel}
+            </button>
           </div>
-        </Dialog>
-      )
-      : <span />;
+        </div>
+      </Dialog>
+    ) : (
+      <span />
+    );
   }
 }
 
-export default connect(({auth}) => ({auth}))(BaseModal);
+export default connect(({ auth }) => ({ auth }))(BaseModal);

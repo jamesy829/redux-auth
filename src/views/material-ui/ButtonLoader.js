@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import ActionFavorite from "material-ui/svg-icons/action/favorite";
 import * as Colors from "material-ui/styles/colors";
 import Spinner from "react-loader";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 class ButtonLoader extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ class ButtonLoader extends React.Component {
       lines: 10,
       length: 4,
       width: 2,
-      radius: 3,
+      radius: 3
     },
     spinColorDark: Colors.darkBlack,
     spinColorLight: Colors.darkWhite,
@@ -35,12 +35,12 @@ class ButtonLoader extends React.Component {
     style: {}
   };
 
-  handleClick (ev) {
+  handleClick(ev) {
     ev.preventDefault();
     this.props.onClick(ev);
   }
 
-  getColor () {
+  getColor() {
     if (this.props.disabled) {
       return this.props.spinColorDisabled;
     } else if (this.props.primary || this.props.secondary) {
@@ -50,42 +50,47 @@ class ButtonLoader extends React.Component {
     }
   }
 
-  renderIcon () {
+  renderIcon() {
     let icon,
-        color = this.getColor();
+      color = this.getColor();
 
     if (this.props.loading) {
       icon = (
-        <div style={{position: "absolute", top: 15, left: 7}}>
+        <div style={{ position: "absolute", top: 15, left: 7 }}>
           <Spinner
             ref="spinner"
             {...this.props.spinConfig}
             color={color}
-            loaded={false} />
+            loaded={false}
+          />
         </div>
       );
     } else {
-      if (typeof(this.props.icon) === "object") {
+      if (typeof this.props.icon === "object") {
         icon = this.props.icon;
       } else {
-        icon = <this.props.icon color={color} style={{width: 15, height: 15}} />;
+        icon = (
+          <this.props.icon color={color} style={{ width: 15, height: 15 }} />
+        );
       }
     }
 
     return (
-      <span style={{
-        width: 15,
-        height: 15,
-        position: "absolute",
-        left: 10,
-        top: 3
-      }}>
+      <span
+        style={{
+          width: 15,
+          height: 15,
+          position: "absolute",
+          left: 10,
+          top: 3
+        }}
+      >
         {icon}
       </span>
     );
   }
 
-  render () {
+  render() {
     let color = this.getColor();
 
     const props = {
@@ -97,7 +102,9 @@ class ButtonLoader extends React.Component {
       disabledLabelColor: this.props.disabledLabelColor,
       fullWidth: this.props.fullWidth,
       href: this.props.href,
-      label: this.props.label || <span style={{paddingLeft: 15, color}}>{this.props.children}</span>,
+      label: this.props.label || (
+        <span style={{ paddingLeft: 15, color }}>{this.props.children}</span>
+      ),
       labelColor: this.props.labelColor || color,
       labelPosition: this.props.labelPosition || "after",
       labelStyle: this.props.labelStyle,
@@ -108,11 +115,9 @@ class ButtonLoader extends React.Component {
       type: this.props.type
     };
 
-   return (
+    return (
       <MuiThemeProvider>
-        <RaisedButton
-          {...props}
-          onClick={this.handleClick.bind(this)}>
+        <RaisedButton {...props} onClick={this.handleClick.bind(this)}>
           {this.renderIcon()}
         </RaisedButton>
       </MuiThemeProvider>

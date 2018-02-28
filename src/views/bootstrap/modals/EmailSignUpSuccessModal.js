@@ -4,16 +4,17 @@ import { connect } from "react-redux";
 import Modal from "./Modal";
 
 class EmailSignUpSuccessModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         containerClass="email-sign-up-success-modal"
         show={this.props.show}
         closeAction={hideEmailSignUpSuccessModal}
-        title="Sign Up Success">
+        title="Sign Up Success"
+      >
         <p>
-          A confirmation email was sent to your account
-          at {this.props.auth.getIn(["ui", "emailSignUpAddress"])}. Follow the
+          A confirmation email was sent to your account at{" "}
+          {this.props.auth.getIn(["ui", "emailSignUpAddress"])}. Follow the
           instructions in the email to complete registration.
         </p>
       </Modal>
@@ -21,4 +22,4 @@ class EmailSignUpSuccessModal extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(EmailSignUpSuccessModal);
+export default connect(({ auth }) => ({ auth }))(EmailSignUpSuccessModal);

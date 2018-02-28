@@ -3,14 +3,15 @@ import { hideEmailSignUpErrorModal } from "../../../actions/ui";
 import Modal from "./Modal";
 
 class EmailSignUpErrorModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         show={this.props.show}
         containerClass="email-sign-up-error-modal"
         title="Sign Up Error"
         errorAddr={["emailSignUp", "errors", "full_messages"]}
-        closeAction={hideEmailSignUpErrorModal} />
+        closeAction={hideEmailSignUpErrorModal}
+      />
     );
   }
 }

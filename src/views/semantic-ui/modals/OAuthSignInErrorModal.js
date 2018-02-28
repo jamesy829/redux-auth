@@ -4,16 +4,17 @@ import Modal from "./Modal";
 import { hideOAuthSignInErrorModal } from "../../../actions/ui";
 
 class OAuthSignInErrorModal extends React.Component {
-  render () {
+  render() {
     return (
       <Modal
         show={this.props.show}
         containerClass="oauth-sign-in-error-modal"
         closeAction={hideOAuthSignInErrorModal}
-        title="OAuth Sign In Error">
+        title="OAuth Sign In Error"
+      >
         <p>
-          <Icon name="attention" /> There was an error
-          authenticating your account. Please try again.
+          <Icon name="attention" /> There was an error authenticating your
+          account. Please try again.
         </p>
       </Modal>
     );

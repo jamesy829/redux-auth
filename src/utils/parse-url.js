@@ -1,8 +1,8 @@
 import querystring from "querystring";
 import extend from "extend";
-import { createLocation } from 'history';
+import { createLocation } from "history";
 
-export function normalizeTokenKeys (params) {
+export function normalizeTokenKeys(params) {
   // normalize keys
   if (params.token) {
     params["access-token"] = params.token;
@@ -22,28 +22,25 @@ export function normalizeTokenKeys (params) {
   }
 
   return params;
-};
-
+}
 
 const getAnchorSearch = function(location) {
   var rawAnchor = location.anchor || "",
-      arr       = rawAnchor.split("?");
-  return (arr.length > 1) ? arr[1] : null;
+    arr = rawAnchor.split("?");
+  return arr.length > 1 ? arr[1] : null;
 };
-
 
 const getSearchQs = function(location) {
   var rawQs = location.search || "",
-      qs    = rawQs.replace("?", ""),
-      qsObj = (qs) ? querystring.parse(qs) : {};
+    qs = rawQs.replace("?", ""),
+    qsObj = qs ? querystring.parse(qs) : {};
 
   return qsObj;
 };
 
-
 const getAnchorQs = function(location) {
-  var anchorQs    = getAnchorSearch(location),
-      anchorQsObj = (anchorQs) ? querystring.parse(anchorQs) : {};
+  var anchorQs = getAnchorSearch(location),
+    anchorQsObj = anchorQs ? querystring.parse(anchorQs) : {};
 
   return anchorQsObj;
 };
@@ -56,10 +53,9 @@ const stripKeys = function(obj, keys) {
   return obj;
 };
 
-export function getAllParams (location) {
+export function getAllParams(location) {
   return extend({}, getAnchorQs(location), getSearchQs(location));
-};
-
+}
 
 const buildCredentials = function(location, keys) {
   var params = getAllParams(location);
@@ -72,7 +68,6 @@ const buildCredentials = function(location, keys) {
   return normalizeTokenKeys(authHeaders);
 };
 
-
 const stripAuthKeysAndNormalize = function(targetString, authKeys) {
   const parsed = querystring.parse(targetString);
   const stripped = stripKeys(parsed, authKeys);
@@ -81,14 +76,20 @@ const stripAuthKeysAndNormalize = function(targetString, authKeys) {
 };
 
 const normalizeSearch = function(location, authKeys) {
-  const newSearch = stripAuthKeysAndNormalize(location.search.replace( '?', '' ), authKeys);
+  const newSearch = stripAuthKeysAndNormalize(
+    location.search.replace("?", ""),
+    authKeys
+  );
   return newSearch ? `?${newSearch}` : location.search;
 };
 
 const normalizeHash = function(location, authKeys) {
-  const [hashAnchor, hashSearch] = location.hash.replace('#', '').split('?');
+  const [hashAnchor, hashSearch] = location.hash.replace("#", "").split("?");
   const newHashSearch = stripAuthKeysAndNormalize(hashSearch, authKeys);
-  const newHash = newHashSearch.length > 0 ? [hashAnchor, newHashSearch].join('?') : hashAnchor;
+  const newHash =
+    newHashSearch.length > 0
+      ? [hashAnchor, newHashSearch].join("?")
+      : hashAnchor;
   return newHash.length > 0 ? `#${newHash}` : location.hash;
 };
 
@@ -118,10 +119,13 @@ export default function getRedirectInfo(currentLocation) {
     ];
 
     var authRedirectHeaders = buildCredentials(currentLocation, authKeys);
-    var authRedirectLocation = getLocationWithoutAuthParams(currentLocation, authKeys);
+    var authRedirectLocation = getLocationWithoutAuthParams(
+      currentLocation,
+      authKeys
+    );
 
     if (authRedirectLocation !== currentLocation) {
-      return {authRedirectHeaders, authRedirectLocation};
+      return { authRedirectHeaders, authRedirectLocation };
     } else {
       return {};
     }
