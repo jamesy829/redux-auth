@@ -2879,6 +2879,9 @@
             case "twitter":
               return { width: 495, height: 645 };
 
+            case "snapchat":
+              return { width: 495, height: 645 };
+
             case "live":
               return { width: 500, height: 560 };
 
