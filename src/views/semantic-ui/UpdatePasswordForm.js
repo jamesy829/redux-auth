@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Input from "./Input";
 import ButtonLoader from "./ButtonLoader";
-import { Icon } from "semantic-ui-react";
+import { Form, Grid, Icon } from "semantic-ui-react";
 import {
   updatePassword,
   updatePasswordFormUpdate
@@ -52,72 +52,73 @@ class UpdatePasswordForm extends React.Component {
       endpoint,
       "loading"
     ]);
-    let disabled =
-      !this.props.auth.getIn(["user", "isSignedIn"]) ||
-      loading ||
-      this.props.auth.getIn(["user", "attributes", "provider"]) !== "email";
 
     return (
-      <form
+      <Form
         className="redux-auth update-password-form clearfix"
         onSubmit={this.handleSubmit.bind(this)}
       >
-        <Input
-          type="password"
-          label="Password"
-          placeholder="Password"
-          disabled={disabled}
-          groupClassName="update-password-password"
-          value={this.props.auth.getIn([
-            "updatePassword",
-            endpoint,
-            "form",
-            "password"
-          ])}
-          errors={this.props.auth.getIn([
-            "updatePassword",
-            endpoint,
-            "errors",
-            "password"
-          ])}
-          onChange={this.handleInput.bind(this, "password")}
-          {...this.props.inputProps.password}
-        />
+        <Grid padded="vertically">
+          <Grid.Column width={16}>
+            <Input
+              type="password"
+              label="Password"
+              placeholder="Password"
+              groupClassName="update-password-password"
+              value={this.props.auth.getIn([
+                "updatePassword",
+                endpoint,
+                "form",
+                "password"
+              ])}
+              errors={this.props.auth.getIn([
+                "updatePassword",
+                endpoint,
+                "errors",
+                "password"
+              ])}
+              onChange={this.handleInput.bind(this, "password")}
+              {...this.props.inputProps.password}
+            />
 
-        <Input
-          type="password"
-          label="Password Confirmation"
-          placeholder="Password Confirmation"
-          disabled={disabled}
-          groupClassName="update-password-password-confirmation"
-          value={this.props.auth.getIn([
-            "updatePassword",
-            endpoint,
-            "form",
-            "password_confirmation"
-          ])}
-          errors={this.props.auth.getIn([
-            "updatePassword",
-            endpoint,
-            "errors",
-            "password_confirmation"
-          ])}
-          onChange={this.handleInput.bind(this, "password_confirmation")}
-          {...this.props.inputProps.passwordConfirmation}
-        />
-
-        <ButtonLoader
-          loading={loading}
-          type="submit"
-          disabled={disabled}
-          className="pull-right update-password-submit"
-          icon={this.props.icon || <Icon name="lock" />}
-          onClick={this.handleSubmit.bind(this)}
-          {...this.props.inputProps.submit}
-        >
-          Update Password
-        </ButtonLoader>
-      </form>
+            <Input
+              type="password"
+              label="Password Confirmation"
+              placeholder="Password Confirmation"
+              groupClassName="update-password-password-confirmation"
+              value={this.props.auth.getIn([
+                "updatePassword",
+                endpoint,
+                "form",
+                "password_confirmation"
+              ])}
+              errors={this.props.auth.getIn([
+                "updatePassword",
+                endpoint,
+                "errors",
+                "password_confirmation"
+              ])}
+              onChange={this.handleInput.bind(this, "password_confirmation")}
+              {...this.props.inputProps.passwordConfirmation}
+            />
+          </Grid.Column>
+        </Grid>
+        <Grid middle="true" aligned="true" padded="vertically">
+          <Grid.Column width={8} verticalAlign="middle" />
+          <Grid.Column width={8} verticalAlign="middle" textAlign="right">
+            <ButtonLoader
+              loading={loading}
+              type="submit"
+              className="right floated update-password-submit"
+              icon={this.props.icon || <Icon name="lock" />}
+              onClick={this.handleSubmit.bind(this)}
+              {...this.props.inputProps.submit}
+            >
+              Update Password
+            </ButtonLoader>
+          </Grid.Column>
+        </Grid>
+      </Form>
     );
   }
 }
