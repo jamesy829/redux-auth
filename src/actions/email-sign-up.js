@@ -21,6 +21,7 @@ export function emailSignUpComplete(user, endpoint) {
   return { type: EMAIL_SIGN_UP_COMPLETE, user, endpoint };
 }
 export function emailSignUpError(errors, endpoint) {
+  console.log(errors);
   return { type: EMAIL_SIGN_UP_ERROR, errors, endpoint };
 }
 export function emailSignUp(body, endpointKey) {
