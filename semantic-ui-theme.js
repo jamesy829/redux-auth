@@ -18961,15 +18961,6 @@
                       { basic: true },
                       _react2.default.createElement(
                         _semanticUiReact.Grid,
-                        { padded: true },
-                        _react2.default.createElement(
-                          _semanticUiReact.Grid.Column,
-                          { width: 16 },
-                          _react2.default.createElement("h2", null, "Sign In")
-                        )
-                      ),
-                      _react2.default.createElement(
-                        _semanticUiReact.Grid,
                         { padded: true, className: "input-fields" },
                         error && dirty && this.renderFormError(error),
                         _react2.default.createElement(
