@@ -12,7 +12,7 @@ function mapStateToProps({ auth }, ownProps) {
 
   return {
     endpoint,
-    form: "auth-emailSignIn-" + endpoint.toString(),
+    form: "auth-emailSignIn-default",
     isSignedIn: auth.getIn(["user", "isSignedIn"])
   };
 }
