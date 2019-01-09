@@ -20129,17 +20129,13 @@
 
         var _propTypes2 = _interopRequireDefault(_propTypes);
 
-        var _Input = __webpack_require__(176);
-
-        var _Input2 = _interopRequireDefault(_Input);
-
-        var _ButtonLoader = __webpack_require__(175);
-
-        var _ButtonLoader2 = _interopRequireDefault(_ButtonLoader);
+        var _reactRedux = __webpack_require__(7);
 
         var _semanticUiReact = __webpack_require__(157);
 
-        var _reactRedux = __webpack_require__(7);
+        var _Input = __webpack_require__(176);
+
+        var _Input2 = _interopRequireDefault(_Input);
 
         var _requestPasswordReset = __webpack_require__(8);
 
@@ -20261,6 +20257,7 @@
                   "email"
                 ]);
 
+                var SubmitButton = this.props.submitComponent;
                 return _react2.default.createElement(
                   _semanticUiReact.Form,
                   {
@@ -20269,67 +20266,91 @@
                     onSubmit: this.handleSubmit.bind(this)
                   },
                   _react2.default.createElement(
-                    _semanticUiReact.Grid,
-                    { padded: "vertically" },
+                    _semanticUiReact.Container,
+                    null,
                     _react2.default.createElement(
-                      _semanticUiReact.Grid.Column,
-                      { width: 16 },
+                      _semanticUiReact.Segment,
+                      { basic: true },
                       _react2.default.createElement(
-                        _Input2.default,
-                        _extends(
-                          {
-                            type: "text",
-                            label: "Email Address",
-                            groupClassName: "request-password-reset-email",
-                            placeholder: "Email Address",
-                            disabled: loading || inputDisabled,
-                            value: this.props.auth.getIn([
-                              "requestPasswordReset",
-                              this.getEndpoint(),
-                              "form",
-                              "email"
-                            ]),
-                            errors: this.props.auth.getIn([
-                              "requestPasswordReset",
-                              this.getEndpoint(),
-                              "errors",
-                              "email"
-                            ]),
-                            onChange: this.handleInput.bind(this, "email")
-                          },
-                          this.props.inputProps.email
+                        _semanticUiReact.Grid,
+                        { padded: true },
+                        _react2.default.createElement(
+                          _semanticUiReact.Grid.Column,
+                          { width: 16 },
+                          _react2.default.createElement(
+                            "h2",
+                            null,
+                            "Forgot Password"
+                          )
+                        ),
+                        _react2.default.createElement(
+                          _semanticUiReact.Grid.Column,
+                          { key: "email", width: 16 },
+                          _react2.default.createElement(
+                            _Input2.default,
+                            _extends(
+                              {
+                                type: "text",
+                                label: "Email Address",
+                                groupClassName: "request-password-reset-email",
+                                placeholder: "Email Address",
+                                disabled: loading || inputDisabled,
+                                value: this.props.auth.getIn([
+                                  "requestPasswordReset",
+                                  this.getEndpoint(),
+                                  "form",
+                                  "email"
+                                ]),
+                                errors: this.props.auth.getIn([
+                                  "requestPasswordReset",
+                                  this.getEndpoint(),
+                                  "errors",
+                                  "email"
+                                ]),
+                                onChange: this.handleInput.bind(this, "email")
+                              },
+                              this.props.inputProps.email
+                            )
+                          )
                         )
                       )
                     )
                   ),
+                  _react2.default.createElement(_semanticUiReact.Divider, {
+                    fitted: true
+                  }),
                   _react2.default.createElement(
-                    _semanticUiReact.Grid,
-                    { middle: "true", aligned: "true", padded: "vertically" },
+                    _semanticUiReact.Container,
+                    null,
                     _react2.default.createElement(
-                      _semanticUiReact.Grid.Column,
-                      { width: 8, verticalAlign: "middle" }
-                    ),
-                    _react2.default.createElement(
-                      _semanticUiReact.Grid.Column,
-                      { width: 8, verticalAlign: "middle", textAlign: "right" },
+                      _semanticUiReact.Segment,
+                      { basic: true },
                       _react2.default.createElement(
-                        _ButtonLoader2.default,
-                        _extends(
-                          {
-                            loading: loading,
-                            type: "submit",
-                            icon: _react2.default.createElement(
-                              _semanticUiReact.Icon,
-                              { name: "send" }
-                            ),
-                            className:
-                              "right floated request-password-reset-submit",
-                            disabled: inputDisabled || submitDisabled,
-                            onClick: this.handleSubmit.bind(this)
-                          },
-                          this.props.inputProps.submit
+                        _semanticUiReact.Grid,
+                        { middle: "true", aligned: "true", padded: true },
+                        _react2.default.createElement(
+                          _semanticUiReact.Grid.Column,
+                          { width: 8, verticalAlign: "middle" },
+                          this.props.callToAction
                         ),
-                        "Request Password Reset"
+                        _react2.default.createElement(
+                          _semanticUiReact.Grid.Column,
+                          { width: 8, verticalAlign: "middle" },
+                          _react2.default.createElement(
+                            SubmitButton,
+                            _extends(
+                              {
+                                type: "submit",
+                                floated: "right",
+                                disabled: inputDisabled || submitDisabled,
+                                className: "email-sign-up-submit",
+                                loading: this.props.submitting
+                              },
+                              this.props.inputProps.submit
+                            ),
+                            "SEND PASSWORD RESET EMAIL"
+                          )
+                        )
                       )
                     )
                   )

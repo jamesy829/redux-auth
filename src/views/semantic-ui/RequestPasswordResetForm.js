@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Input from "./Input";
-import ButtonLoader from "./ButtonLoader";
-import { Form, Grid, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { Form, Divider, Grid, Container, Segment } from "semantic-ui-react";
+
+import Input from "./Input";
 import {
   requestPasswordResetFormUpdate,
   requestPasswordReset
@@ -61,52 +61,66 @@ class RequestPasswordResetForm extends React.Component {
       "email"
     ]);
 
+    const SubmitButton = this.props.submitComponent;
     return (
       <Form
         className="redux-auth request-password-reset-form clearfix"
         onSubmit={this.handleSubmit.bind(this)}
       >
-        <Grid padded="vertically">
-          <Grid.Column width={16}>
-            <Input
-              type="text"
-              label="Email Address"
-              groupClassName="request-password-reset-email"
-              placeholder="Email Address"
-              disabled={loading || inputDisabled}
-              value={this.props.auth.getIn([
-                "requestPasswordReset",
-                this.getEndpoint(),
-                "form",
-                "email"
-              ])}
-              errors={this.props.auth.getIn([
-                "requestPasswordReset",
-                this.getEndpoint(),
-                "errors",
-                "email"
-              ])}
-              onChange={this.handleInput.bind(this, "email")}
-              {...this.props.inputProps.email}
-            />
-          </Grid.Column>
-        </Grid>
-        <Grid middle="true" aligned="true" padded="vertically">
-          <Grid.Column width={8} verticalAlign="middle" />
-          <Grid.Column width={8} verticalAlign="middle" textAlign="right">
-            <ButtonLoader
-              loading={loading}
-              type="submit"
-              icon={<Icon name="send" />}
-              className="right floated request-password-reset-submit"
-              disabled={inputDisabled || submitDisabled}
-              onClick={this.handleSubmit.bind(this)}
-              {...this.props.inputProps.submit}
-            >
-              Request Password Reset
-            </ButtonLoader>
-          </Grid.Column>
-        </Grid>
+        <Container>
+          <Segment basic>
+            <Grid padded>
+              <Grid.Column width={16}>
+                <h2>Forgot Password</h2>
+              </Grid.Column>
+              <Grid.Column key="email" width={16}>
+                <Input
+                  type="text"
+                  label="Email Address"
+                  groupClassName="request-password-reset-email"
+                  placeholder="Email Address"
+                  disabled={loading || inputDisabled}
+                  value={this.props.auth.getIn([
+                    "requestPasswordReset",
+                    this.getEndpoint(),
+                    "form",
+                    "email"
+                  ])}
+                  errors={this.props.auth.getIn([
+                    "requestPasswordReset",
+                    this.getEndpoint(),
+                    "errors",
+                    "email"
+                  ])}
+                  onChange={this.handleInput.bind(this, "email")}
+                  {...this.props.inputProps.email}
+                />
+              </Grid.Column>
+            </Grid>
+          </Segment>
+        </Container>
+        <Divider fitted />
+        <Container>
+          <Segment basic>
+            <Grid middle="true" aligned="true" padded>
+              <Grid.Column width={8} verticalAlign="middle">
+                {this.props.callToAction}
+              </Grid.Column>
+              <Grid.Column width={8} verticalAlign="middle">
+                <SubmitButton
+                  type="submit"
+                  floated="right"
+                  disabled={inputDisabled || submitDisabled}
+                  className="email-sign-up-submit"
+                  loading={this.props.submitting}
+                  {...this.props.inputProps.submit}
+                >
+                  SEND PASSWORD RESET EMAIL
+                </SubmitButton>
+              </Grid.Column>
+            </Grid>
+          </Segment>
+        </Container>
       </Form>
     );
   }
