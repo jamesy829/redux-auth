@@ -20344,7 +20344,7 @@
                                 floated: "right",
                                 disabled: inputDisabled || submitDisabled,
                                 className: "email-sign-up-submit",
-                                loading: this.props.submitting
+                                loading: loading
                               },
                               this.props.inputProps.submit
                             ),
@@ -20632,19 +20632,15 @@
 
         var _propTypes2 = _interopRequireDefault(_propTypes);
 
+        var _reactRedux = __webpack_require__(7);
+
+        var _semanticUiReact = __webpack_require__(157);
+
         var _Input = __webpack_require__(176);
 
         var _Input2 = _interopRequireDefault(_Input);
 
-        var _ButtonLoader = __webpack_require__(175);
-
-        var _ButtonLoader2 = _interopRequireDefault(_ButtonLoader);
-
-        var _semanticUiReact = __webpack_require__(157);
-
         var _updatePassword = __webpack_require__(8);
-
-        var _reactRedux = __webpack_require__(7);
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : { default: obj };
@@ -20754,6 +20750,7 @@
                   endpoint,
                   "loading"
                 ]);
+                var SubmitButton = this.props.submitComponent;
 
                 return _react2.default.createElement(
                   _semanticUiReact.Form,
@@ -20762,95 +20759,116 @@
                     onSubmit: this.handleSubmit.bind(this)
                   },
                   _react2.default.createElement(
-                    _semanticUiReact.Grid,
-                    { padded: "vertically" },
+                    _semanticUiReact.Container,
+                    null,
                     _react2.default.createElement(
-                      _semanticUiReact.Grid.Column,
-                      { width: 16 },
+                      _semanticUiReact.Segment,
+                      { basic: true },
                       _react2.default.createElement(
-                        _Input2.default,
-                        _extends(
-                          {
-                            type: "password",
-                            label: "Password",
-                            placeholder: "Password",
-                            groupClassName: "update-password-password",
-                            value: this.props.auth.getIn([
-                              "updatePassword",
-                              endpoint,
-                              "form",
-                              "password"
-                            ]),
-                            errors: this.props.auth.getIn([
-                              "updatePassword",
-                              endpoint,
-                              "errors",
-                              "password"
-                            ]),
-                            onChange: this.handleInput.bind(this, "password")
-                          },
-                          this.props.inputProps.password
-                        )
-                      ),
-                      _react2.default.createElement(
-                        _Input2.default,
-                        _extends(
-                          {
-                            type: "password",
-                            label: "Password Confirmation",
-                            placeholder: "Password Confirmation",
-                            groupClassName:
-                              "update-password-password-confirmation",
-                            value: this.props.auth.getIn([
-                              "updatePassword",
-                              endpoint,
-                              "form",
-                              "password_confirmation"
-                            ]),
-                            errors: this.props.auth.getIn([
-                              "updatePassword",
-                              endpoint,
-                              "errors",
-                              "password_confirmation"
-                            ]),
-                            onChange: this.handleInput.bind(
-                              this,
-                              "password_confirmation"
+                        _semanticUiReact.Grid,
+                        { padded: true },
+                        _react2.default.createElement(
+                          _semanticUiReact.Grid.Column,
+                          { width: 16 },
+                          _react2.default.createElement(
+                            "h2",
+                            null,
+                            "Update Password"
+                          )
+                        ),
+                        _react2.default.createElement(
+                          _semanticUiReact.Grid.Column,
+                          { width: 16 },
+                          _react2.default.createElement(
+                            _Input2.default,
+                            _extends(
+                              {
+                                type: "password",
+                                label: "Password",
+                                placeholder: "Password",
+                                groupClassName: "update-password-password",
+                                value: this.props.auth.getIn([
+                                  "updatePassword",
+                                  endpoint,
+                                  "form",
+                                  "password"
+                                ]),
+                                errors: this.props.auth.getIn([
+                                  "updatePassword",
+                                  endpoint,
+                                  "errors",
+                                  "password"
+                                ]),
+                                onChange: this.handleInput.bind(
+                                  this,
+                                  "password"
+                                )
+                              },
+                              this.props.inputProps.password
                             )
-                          },
-                          this.props.inputProps.passwordConfirmation
+                          ),
+                          _react2.default.createElement(
+                            _Input2.default,
+                            _extends(
+                              {
+                                type: "password",
+                                label: "Password Confirmation",
+                                placeholder: "Password Confirmation",
+                                groupClassName:
+                                  "update-password-password-confirmation",
+                                value: this.props.auth.getIn([
+                                  "updatePassword",
+                                  endpoint,
+                                  "form",
+                                  "password_confirmation"
+                                ]),
+                                errors: this.props.auth.getIn([
+                                  "updatePassword",
+                                  endpoint,
+                                  "errors",
+                                  "password_confirmation"
+                                ]),
+                                onChange: this.handleInput.bind(
+                                  this,
+                                  "password_confirmation"
+                                )
+                              },
+                              this.props.inputProps.passwordConfirmation
+                            )
+                          )
                         )
                       )
                     )
                   ),
+                  _react2.default.createElement(_semanticUiReact.Divider, {
+                    fitted: true
+                  }),
                   _react2.default.createElement(
-                    _semanticUiReact.Grid,
-                    { middle: "true", aligned: "true", padded: "vertically" },
+                    _semanticUiReact.Container,
+                    null,
                     _react2.default.createElement(
-                      _semanticUiReact.Grid.Column,
-                      { width: 8, verticalAlign: "middle" }
-                    ),
-                    _react2.default.createElement(
-                      _semanticUiReact.Grid.Column,
-                      { width: 8, verticalAlign: "middle", textAlign: "right" },
+                      _semanticUiReact.Segment,
+                      { basic: true },
                       _react2.default.createElement(
-                        _ButtonLoader2.default,
-                        _extends(
-                          {
-                            loading: loading,
-                            type: "submit",
-                            className: "right floated update-password-submit",
-                            icon:
-                              this.props.icon ||
-                              _react2.default.createElement(
-                                _semanticUiReact.Icon,
-                                { name: "lock" }
-                              ),
-                            onClick: this.handleSubmit.bind(this)
-                          },
-                          this.props.inputProps.submit
-                        ),
-                        "Update Password"
+                        _semanticUiReact.Grid,
+                        { middle: "true", aligned: "true", padded: true },
+                        _react2.default.createElement(
+                          _semanticUiReact.Grid.Column,
+                          { width: 16, verticalAlign: "middle" },
+                          _react2.default.createElement(
+                            SubmitButton,
+                            _extends(
+                              {
+                                type: "submit",
+                                floated: "right",
+                                className: "email-sign-up-submit",
+                                loading: loading
+                              },
+                              this.props.inputProps.submit
+                            ),
+                            "Update Password"
+                          )
+                        )
                       )
                     )
                   )

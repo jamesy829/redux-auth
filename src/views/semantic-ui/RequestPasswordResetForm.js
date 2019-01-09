@@ -112,7 +112,7 @@ class RequestPasswordResetForm extends React.Component {
                   floated="right"
                   disabled={inputDisabled || submitDisabled}
                   className="email-sign-up-submit"
-                  loading={this.props.submitting}
+                  loading={loading}
                   {...this.props.inputProps.submit}
                 >
                   SEND PASSWORD RESET EMAIL
