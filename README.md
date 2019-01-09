@@ -1,3 +1,16 @@
+### Editing Guide for Developers
+
+1.  For UI changes, just changes should only happen in src/views/semantic-ui
+2.  After creating your change, run `npm run release` to build the files.
+3.  Commit only the files that you have changed and the created JS file (semantic-ui-theme.js) in the root folder.
+4.  Push these changes to master.
+
+Now, in the TopicDNA application, run `npm update redux-auth`. It should update redux-auth dependencies with new changes.
+If you are not satisfied with the changes, proceed to step 1 again.
+If you don't want any of these changes, revert the master by force pushing back to its original state before you made your changes.
+
+Note: you may push to a different branch, but make sure to specify this branch in the package.json in the repository that uses this project.
+
 [![redux auth](https://github.com/lynndylanhurley/redux-auth/raw/master/docs/images/redux-auth-logo.gif)](https://github.com/lynndylanhurley/redux-auth)
 
 ### Simple, secure authentication for react + redux
@@ -5,7 +18,6 @@
 [![npm version](https://badge.fury.io/js/redux-auth.svg)](https://badge.fury.io/js/redux-auth)
 [![Build Status](https://travis-ci.org/lynndylanhurley/redux-auth.svg)](https://travis-ci.org/lynndylanhurley/redux-auth)
 [![Coverage Status](https://coveralls.io/repos/lynndylanhurley/redux-auth/badge.svg?branch=master&service=github)](https://coveralls.io/github/lynndylanhurley/redux-auth?branch=master)
-
 
 # TL;DR - View the [Live Demo](http://redux-auth.herokuapp.com/)
 
@@ -78,19 +90,19 @@ This plugin was designed to work out of the box with the wonderful [devise token
 
 Only npm is currently supported.
 
-~~~sh
+```sh
 npm install redux-auth --save
-~~~
+```
 
 If you want to use the [Material UI][material-ui] or [Bootstrap][react-bootstrap] themes, you will need to install those libraries as well.
 
-~~~sh
+```sh
 # install material ui
 npm install material-ui --save
 
 # or bootstrap
 npm install react-bootstrap --save
-~~~
+```
 
 Material UI uses inline styles so no further configuration is needed. But with the bootstrap theme, the CSS will also need to be included. Read more at the [React Bootstrap][react-bootstrap] project page.
 
@@ -104,9 +116,9 @@ You must also install and use a json loader
 
 There are 3 Themes included in this module.
 
-1. [Material UI][material-ui]
-2. [Bootstrap][react-bootstrap]
-3. A default theme
+1.  [Material UI][material-ui]
+2.  [Bootstrap][react-bootstrap]
+3.  A default theme
 
 The default theme has no styling, and honestly it just looks really bad. But if you hate heavy UI frameworks and you like to style everything yourself, then you will love the default theme.
 
@@ -126,14 +138,14 @@ A form used for email based registration.
 
 * **`endpoint`**: The key of the target provider service as represented in the endpoint configuration block.
 * **`inputProps`**: An object containing the following attributes:
-	* **`email`**: An object that will override the email input component's default props.
-	* **`password`**: An object that will override the password input component's default props.
-	* **`passwordConfirmation`**: An object that will override the password confirmation input component's default props.
-	* **`submit`**: An object that will override the submit button component's default props.
+  _ **`email`**: An object that will override the email input component's default props.
+  _ **`password`**: An object that will override the password input component's default props.
+  _ **`passwordConfirmation`**: An object that will override the password confirmation input component's default props.
+  _ **`submit`**: An object that will override the submit button component's default props.
 
 ##### EmailSignUpForm usage
 
-~~~js
+```js
 // default theme
 import { EmailSignUpForm } from "redux-auth/default-theme";
 
@@ -147,7 +159,7 @@ import { EmailSignUpForm } from "redux-auth/bootstrap-theme";
 render: () {
   return <EmailSignUpForm />;
 }
-~~~
+```
 
 [View EmailSignUpForm API Expectations](https://github.com/lynndylanhurley/redux-auth/blob/master/docs/api-expectations/email-sign-up.md)
 
@@ -168,7 +180,7 @@ A form used to sign in using accounts that were registered by email.
   * **`password`**: An object that will override the password input component's default props.
   * **`submit`**: An object that will override the submit button component's default props.
 
-~~~js
+```js
 // default theme
 import { EmailSignInForm } from "redux-auth/default-theme";
 
@@ -182,7 +194,7 @@ import { EmailSignInForm } from "redux-auth/bootstrap-theme";
 render: () {
   return <EmailSignInForm />;
 }
-~~~
+```
 
 [View EmailSignInForm API expectations](https://github.com/lynndylanhurley/redux-auth/blob/master/docs/api-expectations/email-sign-in.md)
 
@@ -202,7 +214,7 @@ A button used to authenticate using an OAuth provider (facebook, github, etc.).
 
 Any additional properties will be passed on the button component of the given theme.
 
-~~~js
+```js
 // default theme
 import { OAuthSignInButton } from "redux-auth/default-theme";
 
@@ -220,7 +232,7 @@ render: () {
   // or using custom label text
   return <OAuthSignInButton>Custom Label</OAuthSignInButton>;
 }
-~~~
+```
 
 [View OAuthSignInButton API expectations](https://github.com/lynndylanhurley/redux-auth/blob/master/docs/api-expectations/oauth-sign-in.md)
 
@@ -239,7 +251,7 @@ A button used to end the current user's session.
 
 Any additional properties will be passed on the button component of the given theme.
 
-~~~js
+```js
 // default theme
 import { SignOutButton } from "redux-auth/default-theme";
 
@@ -257,7 +269,7 @@ render: () {
   // or using custom label text
   return <SignOutButton>Custom Label</SignOutButton>;
 }
-~~~
+```
 
 [View SignOutButton API expectations](https://github.com/lynndylanhurley/redux-auth/blob/master/docs/api-expectations/sign-out.md)
 
@@ -275,7 +287,7 @@ A button used to destroy the account of the current user. This will also end the
 
 Any additional properties will be passed on the button component of the given theme.
 
-~~~js
+```js
 // default theme
 import { DestroyAccountButton } from "redux-auth/default-theme";
 
@@ -293,7 +305,7 @@ render: () {
   // or using custom label text
   return <DestroyAccountButton>Custom Label</DestroyAccountButton>;
 }
-~~~
+```
 
 [View DestroyAccountButton API Expectations](https://github.com/lynndylanhurley/redux-auth/blob/master/docs/api-expectations/destroy-account.md)
 
@@ -312,7 +324,7 @@ A form used to send password reset emails to users that forgot their password. W
   * **`email`**: An object that will override the email input component's default props.
   * **`submit`**: An object that will override the submit button component's default props.
 
-~~~js
+```js
 // default theme
 import { RequestPasswordResetForm } from "redux-auth/default-theme";
 
@@ -326,7 +338,7 @@ import { RequestPasswordResetForm } from "redux-auth/bootstrap-theme";
 render: () {
   return <RequestPasswordResetForm />;
 }
-~~~
+```
 
 [View RequestPasswordResetForm API Expectations](https://github.com/lynndylanhurley/redux-auth/blob/master/docs/api-expectations/request-password-reset.md)
 
@@ -346,7 +358,7 @@ A form that can be used to change the current user's password.
   * **`passwordConfirmation`**: An object that will override the password confirmation input component's default props.
   * **`submit`**: An object that will override the submit button component's default props.
 
-~~~js
+```js
 // default theme
 import { UpdatePasswordForm } from "redux-auth/default-theme";
 
@@ -360,7 +372,7 @@ import { UpdatePasswordForm } from "redux-auth/bootstrap-theme";
 render: () {
   return <UpdatePasswordForm />;
 }
-~~~
+```
 
 [View UpdatePasswordForm API Expectations](https://github.com/lynndylanhurley/redux-auth/blob/master/docs/api-expectations/update-password.md)
 
@@ -376,7 +388,7 @@ This component **MUST** live at the top level of your application **outside of y
 
 The following example shows the relevant router configuration. Note that this is not a complete example. See the [demo app][redux-auth-demo] for a complete, working setup.
 
-~~~js
+```js
 // default theme
 import { AuthGlobals } from "redux-auth/default-theme";
 
@@ -409,7 +421,7 @@ var routes = (
     <Route path="account" component={Account} onEnter={requireAuth} />
   </Route>
 );
-~~~
+```
 
 --
 
@@ -420,65 +432,75 @@ var routes = (
 This must be run before your app is initialized. This should be run on both the server, and on the client. The server will need an additional argument containing information about the current request's cookies and location.
 
 ##### configure arguments
+
 * **`endpoints`**: An object containing information about your API. This at least needs to contain the full path to your URL as the `apiUrl` property. See [here](#endpoint-config-options) for a complete list of endpoint config options.
 * **`settings`**: When rendering serverside, this will need to be an object that contains the following attributes:
   * **`isServer`**: A boolean that must be set to `true` when rendering server-side.
   * **`cookies`**: A string representation of the cookies from the current request. This will be parsed for any auth credentials.
   * **`location`**: A string representation of the current request's URL.
 
-Additionaly when rendering on client side some additional settings can be passed in  **`settings`** object.
-  * **`cleanSession`**: A boolean that tells if all locally stored credentials will be flushed.
-  * **`clientOnly`**: A boolean that tells if code is run only on client side. Should be set `true` with only client-side usage.
+Additionaly when rendering on client side some additional settings can be passed in **`settings`** object.
+
+* **`cleanSession`**: A boolean that tells if all locally stored credentials will be flushed.
+* **`clientOnly`**: A boolean that tells if code is run only on client side. Should be set `true` with only client-side usage.
 
 --
 
 ##### configure example
 
-~~~js
+```js
 import { configure } from "redux-auth";
 
 // server-side usage
-store.dispatch(configure(
-  {apiUrl: "https://api.graveflex.com"},
-  {isServer: true, cookies, currentLocation}
-)).then(({redirectPath, blank} = {}) => {
-  // if `blank` is true, this is an OAuth redirect and should not
-  // be rendered
-
-  // use your server to render your app, or redirect
-  // to another location if the user is unauthorized.
-
-  // see the demo app for a more complete example.
-});
+store
+  .dispatch(
+    configure(
+      { apiUrl: "https://api.graveflex.com" },
+      { isServer: true, cookies, currentLocation }
+    )
+  )
+  .then(({ redirectPath, blank } = {}) => {
+    // if `blank` is true, this is an OAuth redirect and should not
+    // be rendered
+    // use your server to render your app, or redirect
+    // to another location if the user is unauthorized.
+    // see the demo app for a more complete example.
+  });
 
 // client-side usage
-store.dispatch(configure(
-  {apiUrl: "https://api.graveflex.com"},
-  {serverSideRendering: true, cleanSession: true}
-)).then(() => {
-  // your store should now have the current user. now render your
-  // app to the DOM. see the demo app for a more complete example.
-});
-~~~
+store
+  .dispatch(
+    configure(
+      { apiUrl: "https://api.graveflex.com" },
+      { serverSideRendering: true, cleanSession: true }
+    )
+  )
+  .then(() => {
+    // your store should now have the current user. now render your
+    // app to the DOM. see the demo app for a more complete example.
+  });
+```
 
 --
 
 ### fetch
+
 A wrapper around the [whatwg fetch][whatwg-fetch] implementation that automatically sends and tracks authentication headers. See [here][fetch-spec] for the complete spec.
 
 Any requests to the API that rely on authentication will need to use the `fetch` function included in this library.
 
 --
+
 ###### fetch example
 
-~~~js
+```js
 import { fetch } from "redux-auth";
 
 // usage
 fetch("http://api.mysite.com").then(resp => {
   alert(`Api response: `${resp}`);
 });
-~~~
+```
 
 --
 
@@ -490,21 +512,22 @@ The following example assumes that you are familiar with redux, and that you kno
 
 This example assumes a directory structure that looks like this:
 
-~~~
+```
 src/
   app.js
   client.js
   server.js
-~~~
+```
 
 ##### config shared by both client and server
-~~~js
+
+```js
 // app.js
 import React from "react";
-import {Provider} from "react-redux";
-import {configure, authStateReducer} from "redux-auth";
-import {createStore, compose, applyMiddleware, combineReducers} from "redux";
-import {AuthGlobals} from "redux-auth/default-theme";
+import { Provider } from "react-redux";
+import { configure, authStateReducer } from "redux-auth";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import { AuthGlobals } from "redux-auth/default-theme";
 
 class App extends React.Component {
   render() {
@@ -519,44 +542,49 @@ class App extends React.Component {
 
 // create your main reducer
 const reducer = combineReducers({
-  auth: authStateReducer,
+  auth: authStateReducer
   // ... add your own reducers here
 });
 
 // create your app's store.
 // note that thunk is required to use redux-auth
 const store = compose(
-  applyMiddleware(thunk),
+  applyMiddleware(thunk)
   // ... add additional middleware here (router, etc.)
 )(createStore)(reducer);
 
 // a single function can be used for both client and server-side rendering.
 // when run from the server, this function will need to know the cookies and
 // url of the current request. also be sure to set `isServer` to true.
-export function renderApp({cookies, isServer, currentLocation} = {}) {
+export function renderApp({ cookies, isServer, currentLocation } = {}) {
   // configure redux-auth BEFORE rendering the page
-  return store.dispatch(configure(
-    // use the FULL PATH to your API
-    {apiUrl: "http://api.catfancy.com"},
-    {isServer, cookies, currentLocation}
-  )).then(({redirectPath, blank} = {}) => {
-    if (blank) {
-      // if `blank` is true, this is an OAuth redirect and should not
-      // be rendered
-      return <noscript />;
-    } else {
-      return (
-        <Provider store={store} key="provider">
-          <App />
-        </Provider>
-      );
-    }
-  });
+  return store
+    .dispatch(
+      configure(
+        // use the FULL PATH to your API
+        { apiUrl: "http://api.catfancy.com" },
+        { isServer, cookies, currentLocation }
+      )
+    )
+    .then(({ redirectPath, blank } = {}) => {
+      if (blank) {
+        // if `blank` is true, this is an OAuth redirect and should not
+        // be rendered
+        return <noscript />;
+      } else {
+        return (
+          <Provider store={store} key="provider">
+            <App />
+          </Provider>
+        );
+      }
+    });
 }
-~~~
+```
 
 ##### server-side rendering configuration
-~~~js
+
+```js
 // server.js
 import qs from "query-string";
 import {renderToString} from "react-dom/server";
@@ -593,11 +621,11 @@ server.ext("onPreResponse", (request, reply) => {
     reply(getMarkup(appComponent));
   });
 }
-~~~
+```
 
 ##### client side rendering configuration
 
-~~~js
+```js
 // client.js
 import React from "react";
 import ReactDOM from "react-dom";
@@ -607,7 +635,7 @@ const reactRoot = window.document.getElementById("react-root");
 renderApp().then(appComponent => {
   ReactDOM.render(appComponent, reactRoot);
 });
-~~~
+```
 
 **Note:** be sure to include the [`AuthGlobals`](#authglobals) component at the top level of your application. This means **outside** of your `Routes` if you're using something like [react-router][react-router].
 
@@ -621,15 +649,17 @@ This plugin allows for the use of multiple user authentication endpoint configur
 
 When using a single user type, you will pass a single object to the `configure` method as shown in the following example.
 
-~~~js
-store.dispatch(configure({
-  apiUrl: 'https://devise-token-auth.dev'
-}));
-~~~
+```js
+store.dispatch(
+  configure({
+    apiUrl: "https://devise-token-auth.dev"
+  })
+);
+```
 
 When using multiple user types, you will instead pass an array of configurations, as shown in the following example.
 
-~~~javascript
+```javascript
 store.dispatch(configure([
   {
     default: {
@@ -658,7 +688,7 @@ store.dispatch(configure([
   cookies,
   currentLocation
 ));
-~~~
+```
 
 ### Using multiple endpoints with redux-auth components
 
@@ -667,12 +697,13 @@ All components accept an `endpoint` attribute that will determine which of the e
 The following example assumes a configuration where two endpoints have been defined, `default` and `auth`:
 
 ##### Component example:
-~~~js
+
+```js
 import { EmailSignInForm } from "redux-auth/default-theme";
 
 // within render method
-<EmailSignInForm endpoint="alt" />
-~~~
+<EmailSignInForm endpoint="alt" />;
+```
 
 --
 
@@ -680,7 +711,7 @@ import { EmailSignInForm } from "redux-auth/default-theme";
 
 This is the complete list of options that can be passed to the endpoint config.
 
-~~~js
+```js
 import { configure } from "redux-auth";
 
 // ... configure store, routes, etc... //
@@ -701,64 +732,84 @@ store.dispatch(configure({
     google:    '/evil_user_auth/google_oauth2'
   }
 }).then(// ... render your app ... //
-~~~
+```
 
 #### apiUrl
+
 ###### string
+
 The base route to your api. Each of the following paths will be relative to this URL. Authentication headers will only be added to requests with this value as the base URL.
 
 --
 
 #### tokenValidationPath
+
 ###### string
+
 Path (relative to `apiUrl`) to validate authentication tokens. [Read more](#token-validation-flow).
 
 --
 
 #### signOutPath
+
 ###### string
+
 Path (relative to `apiUrl`) to de-authenticate the current user. This will destroy the user's token both server-side and client-side.
 
 --
 
 #### authProviderPaths
+
 ###### object
+
 An object containing paths to auth endpoints. Keys should be the names of the providers, and the values should be the auth paths relative to the `apiUrl`. [Read more](#oauth-2-authentication-flow).
 
 --
 
 #### emailRegistrationPath
+
 ###### string
+
 Path (relative to `apiUrl`) for submitting new email registrations. [Read more](#email-registration-flow).
 
 --
 
 #### accountUpdatePath
+
 ###### string
+
 Path (relative to `apiUrl`) for submitting account update requests.
 
 --
 
 #### accountDeletePath
+
 ###### string
+
 Path (relative to `apiUrl`) for submitting account deletion requests.
 
 --
 
 #### emailSignInPath
+
 ###### string
+
 Path (relative to `apiUrl`) for signing in to an existing email account.
 
 --
 
 #### passwordResetPath
+
 ###### string
+
 Path (relative to `apiUrl`) for requesting password reset emails.
 
 --
 
 #### passwordUpdatePath
+
 ###### string
+
 Path (relative to `apiUrl`) for submitting new passwords for authenticated users.
 
 --
@@ -779,10 +830,10 @@ Follow these links to learn more about what the API expects from this library, a
 
 # Contributing
 
-1. Create a feature branch with your changes.
-1. Write some test cases.
-1. Make all the tests pass.
-1. Issue a pull request.
+1.  Create a feature branch with your changes.
+1.  Write some test cases.
+1.  Make all the tests pass.
+1.  Issue a pull request.
 
 I will grant you commit access if you send quality pull requests.
 
@@ -792,10 +843,10 @@ I will grant you commit access if you send quality pull requests.
 
 There is a test project in the `demo` directory of this app. To start a dev server, perform the following steps.
 
-1. `cd` to the root of this project.
-1. `cd dummy`
-1. `npm install`
-1. `npm run watch`
+1.  `cd` to the root of this project.
+1.  `cd dummy`
+1.  `npm install`
+1.  `npm run watch`
 
 A hot-reloading dev server will start on [localhost:8000](http://localhost:8000). The test suite will be run as well.
 
@@ -803,9 +854,9 @@ A hot-reloading dev server will start on [localhost:8000](http://localhost:8000)
 
 If you just want to run the tests, follow these steps:
 
-1. `cd` into the root of this project
-1. `npm install`
-1. `npm test`
+1.  `cd` into the root of this project
+1.  `npm install`
+1.  `npm test`
 
 ### Testing against a live API
 
@@ -852,13 +903,11 @@ WTFPL © Lynn Dylan Hurley
 [redux-auth-demo]: http://github.com/lynndylanhurley/redux-auth-demo
 [whatwg-fetch]: https://github.com/github/fetch
 [fetch-spec]: https://fetch.spec.whatwg.org/
-
 [o-auth-flow]: https://github.com/lynndylanhurley/ng-token-auth/raw/master/test/app/images/flow/omniauth-flow.jpg
 [token-validation-flow]: https://github.com/lynndylanhurley/ng-token-auth/raw/master/test/app/images/flow/validation-flow.jpg
 [email-registration-flow]: https://github.com/lynndylanhurley/ng-token-auth/raw/master/test/app/images/flow/email-registration-flow.jpg
 [email-sign-in-flow]: https://github.com/lynndylanhurley/ng-token-auth/raw/master/test/app/images/flow/email-sign-in-flow.jpg
 [password-reset-flow]: https://github.com/lynndylanhurley/ng-token-auth/raw/master/test/app/images/flow/password-reset-flow.jpg
-
 [mui-destroy-account]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/gifs/destroy-account.gif
 [mui-email-sign-in]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/gifs/email-sign-in.gif
 [mui-email-sign-up]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/gifs/email-sign-up.gif
@@ -866,7 +915,5 @@ WTFPL © Lynn Dylan Hurley
 [mui-password-reset]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/gifs/request-password-reset.gif
 [mui-update-password]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/gifs/update-password.gif
 [mui-sign-out]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/gifs/sign-out.gif
-
 [mui-error-dialog]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/images/mui-error-dialog.png
 [mui-inline-errors]: https://github.com/lynndylanhurley/redux-auth/raw/master/docs/images/mui-inline-errors.png
-
