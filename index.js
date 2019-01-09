@@ -3106,7 +3106,11 @@
               .then(_handleFetchResponse.parseResponse)
               .then(function(_ref) {
                 var user = _ref.user;
-                return dispatch(updatePasswordComplete(endpoint, user));
+
+                dispatch(updatePasswordComplete(endpoint, user));
+                setTimeout(function() {
+                  window.location.href = "/";
+                }, 3000);
               })
               .catch(function(_ref2) {
                 var errors = _ref2.errors;

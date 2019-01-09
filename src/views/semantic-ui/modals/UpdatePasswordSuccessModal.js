@@ -11,7 +11,10 @@ class UpdatePasswordSuccessModal extends React.Component {
         closeAction={hideUpdatePasswordSuccessModal}
         title="Success"
       >
-        <p>Your password has been successfully changed.</p>
+        <p>
+          Your password has been successfully changed. The page will reload in 3
+          seconds...
+        </p>
       </Modal>
     );
   }

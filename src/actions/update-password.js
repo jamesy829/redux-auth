@@ -32,7 +32,12 @@ export function updatePassword(body, endpoint) {
       body: JSON.stringify(body)
     })
       .then(parseResponse)
-      .then(({ user }) => dispatch(updatePasswordComplete(endpoint, user)))
+      .then(({ user }) => {
+        dispatch(updatePasswordComplete(endpoint, user));
+        setTimeout(function() {
+          window.location.href = "/";
+        }, 3000);
+      })
       .catch(({ errors }) => dispatch(updatePasswordError(endpoint, errors)));
   };
 }

@@ -3138,7 +3138,7 @@
                   _react2.default.createElement(
                     "p",
                     null,
-                    "Your password has been successfully changed."
+                    "Your password has been successfully changed. The page will reload in 3 seconds..."
                   )
                 );
               }
