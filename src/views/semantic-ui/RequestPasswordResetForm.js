@@ -115,7 +115,7 @@ class RequestPasswordResetForm extends React.Component {
                   loading={loading}
                   {...this.props.inputProps.submit}
                 >
-                  SEND PASSWORD RESET EMAIL
+                  Send Password Reset Email
                 </SubmitButton>
               </Grid.Column>
             </Grid>

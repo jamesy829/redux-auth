@@ -20341,7 +20341,7 @@
                               },
                               this.props.inputProps.submit
                             ),
-                            "SEND PASSWORD RESET EMAIL"
+                            "Send Password Reset Email"
                           )
                         )
                       )
