@@ -36,10 +36,10 @@ class EmailSignInForm extends React.Component {
     submitComponent: Button
   };
 
-  renderFormError(error) {
+  renderFormError() {
     return (
       <Grid.Column key="errors" width={16}>
-        <FormError error={error} />
+        <FormError error="Invalid email/password combination" />
       </Grid.Column>
     );
   }
@@ -66,7 +66,7 @@ class EmailSignInForm extends React.Component {
         <Container>
           <Segment basic>
             <Grid padded className="input-fields">
-              {error && dirty && this.renderFormError(error)}
+              {error && dirty && this.renderFormError()}
               <Grid.Column key="email" width={16}>
                 <Field
                   component={Input}

@@ -135,25 +135,13 @@
          */
 
         if (false) {
-          var REACT_ELEMENT_TYPE =
-            (typeof Symbol === "function" &&
-              Symbol.for &&
-              Symbol.for("react.element")) ||
-            0xeac7;
-
-          var isValidElement = function(object) {
-            return (
-              typeof object === "object" &&
-              object !== null &&
-              object.$$typeof === REACT_ELEMENT_TYPE
-            );
-          };
+          var ReactIs = require("react-is");
 
           // By explicitly using `prop-types` you are opting into new development behavior.
           // http://fb.me/prop-types-in-prod
           var throwOnDirectAccess = true;
           module.exports = require("./factoryWithTypeCheckers")(
-            isValidElement,
+            ReactIs.isElement,
             throwOnDirectAccess
           );
         } else {
@@ -178,6 +166,8 @@
         var ReactPropTypesSecret = __webpack_require__(5);
 
         function emptyFunction() {}
+        function emptyFunctionWithReset() {}
+        emptyFunctionWithReset.resetWarningCache = emptyFunction;
 
         module.exports = function() {
           function shim(
@@ -218,16 +208,19 @@
             any: shim,
             arrayOf: getShim,
             element: shim,
+            elementType: shim,
             instanceOf: getShim,
             node: shim,
             objectOf: getShim,
             oneOf: getShim,
             oneOfType: getShim,
             shape: getShim,
-            exact: getShim
+            exact: getShim,
+
+            checkPropTypes: emptyFunctionWithReset,
+            resetWarningCache: emptyFunction
           };
 
-          ReactPropTypes.checkPropTypes = emptyFunction;
           ReactPropTypes.PropTypes = ReactPropTypes;
 
           return ReactPropTypes;
@@ -18921,12 +18914,12 @@
           _createClass(EmailSignInForm, [
             {
               key: "renderFormError",
-              value: function renderFormError(error) {
+              value: function renderFormError() {
                 return _react2.default.createElement(
                   _semanticUiReact.Grid.Column,
                   { key: "errors", width: 16 },
                   _react2.default.createElement(_FormError2.default, {
-                    error: error
+                    error: "Invalid email/password combination"
                   })
                 );
               }
@@ -18962,7 +18955,7 @@
                       _react2.default.createElement(
                         _semanticUiReact.Grid,
                         { padded: true, className: "input-fields" },
-                        error && dirty && this.renderFormError(error),
+                        error && dirty && this.renderFormError(),
                         _react2.default.createElement(
                           _semanticUiReact.Grid.Column,
                           { key: "email", width: 16 },
