@@ -17,7 +17,6 @@ class Input extends React.Component {
   render() {
     const { meta, ...inputProps } = this.props;
     const hasError = meta && meta.error && meta.touched;
-
     return (
       <div>
         <Form.Input {...inputProps} />

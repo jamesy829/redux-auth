@@ -101,9 +101,14 @@ class EmailSignUpFormView extends React.Component {
       valid,
       isSignedIn
     } = this.props;
+    console.log(!valid && !error, "!valid && !error");
+    console.log(valid, "valid");
+    console.log;
+    console.log(isSignedIn, "isSignedIn");
+    console.log(submitting, "submitting");
+    console.log("disabled", !valid || submitting || isSignedIn);
     const disabled = !valid || submitting || isSignedIn;
     const SubmitButton = this.props.submitComponent;
-
     return (
       <Form
         className="redux-auth email-sign-up-form clearfix"

@@ -19181,7 +19181,6 @@
                   inputProps = _objectWithoutProperties(_props, ["meta"]);
 
                 var hasError = meta && meta.error && meta.touched;
-
                 return _react2.default.createElement(
                   "div",
                   null,
@@ -19773,9 +19772,14 @@
                   valid = _props.valid,
                   isSignedIn = _props.isSignedIn;
 
+                console.log(!valid && !error, "!valid && !error");
+                console.log(valid, "valid");
+                console.log;
+                console.log(isSignedIn, "isSignedIn");
+                console.log(submitting, "submitting");
+                console.log("disabled", !valid || submitting || isSignedIn);
                 var disabled = !valid || submitting || isSignedIn;
                 var SubmitButton = this.props.submitComponent;
-
                 return _react2.default.createElement(
                   _semanticUiReact.Form,
                   {
